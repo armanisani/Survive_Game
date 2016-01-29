@@ -5,14 +5,13 @@
     <title>Survive Game</title>
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-
   </head>
   <body>
     <Header> Survive </header>
       <div class="container">
-        <div class="slot" id="slot3">left</div>
-        <div class="slot" id="slot2">middle</div>
-        <div class="slot" id="slot1">right</div>
+        <img src="" alt="slot3" class="slot" id="slot3" />
+        <img src="" alt="slot2" class="slot" id="slot2" />
+        <img src="" alt="slot1" class="slot" id="slot1" />
       </div>
       <footer class="container">
         <div class="context3">3</div>
@@ -20,10 +19,21 @@
         <div class="context1">1</div>
       </footer>
     <script>
+    var box = 0
+    var box = function() {if(box = 0) {
+      return true
+      box += 1
+    }
+    else {
+      return false
+    }}
+    var axe = function() {
+      if (currentPlayer.axe = true) {
+      return true
+    }}
       game = {
-        door: $('#door')
         slots: $('.slot'),
-        slot1: $('#slots1'),
+        slot1: $('#slot1'),
         slot2: $('#slot2'),
         slot3: $('#slot3'),
         context1: $('.context1'),
@@ -33,55 +43,70 @@
         nextPath2: function(secondPath) {game.pickPath(secondPath.slot1, secondPath.slot2, secondPath.slot3)},
         nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, secondPath.slot2, secondPath.slot3)},
         pickPath: function(first, second, third) {
-          if ($(this).truth == true) {
-            $(this).slot1.on('click',function(){game.nextPath1(first)})
-            $(this).slot1.text(first.image)
-            $(this).context1.text(first.context)
+          game.getPlayer()
+          if (first.truth == true) {
+            game.slot1.on('click',function(){game.nextPath1(first)})
           }
-          if (game.)
-          $(this).slot2.on('click',function(){game.nextPath2(second)})
-          $(this).slot2.text(second.image)
-          $(this).context2.text(second.context)
-          $(this).slot3.on('click',function(){game.nextPath3(third)})
-          $(this).slot3.text(third.image)
-          $(this).context3.text(third.context)
+          game.slot1.attr('src', first.image)
+          game.context1.text(first.context)
+          if (second.truth == true) {
+          game.slot2.on('click',function(){game.nextPath2(second)})
+          }
+          game.slot2.attr('src', second.image)
+          game.context2.text(second.context)
+          if (third.truth == true) {
+          game.slot3.on('click',function(){game.nextPath3(third)})
+          }
+          game.slot3.attr('src', third.image)
+          game.context3.text(third.context)
         },
-        path1: {
+        paths: {
           slot1: {
             truth: true,
             context: "You look to your left and notice a wooden door. You try to open it and it's locked. Should I take a closer look?",
-            image: <img src="img/Door.png" alt="Door" id= "door"/>,
+            image: 'img/Door.png',
             slot1: {
-              truth: if (game.players.)
-              context: ""
-              image:
-              slot1: {}
+              truth: axe,
+              context: "Use the axe you found and axe your way through the door",
+              image: 'img/fire axe.jpg',
+              slot1: {},
               slot2: {},
               slot3: {}
             },
+            slot2: {
+              truth: "",
+              context: "",
+              image: ""
+            },
+            slot3: {}
+          },
+          slot2: {
+            context: "You notice a box in the corner of the room. Should i check what's inside?",
+            truth: box,
+            image: 'img/closedbox.jpg',
+            slot1: {},
             slot2: {},
             slot3: {}
           },
-          slot2: {},
-          slot3: {},
-          image: "",
-          context: ""
+          slot3: {
+            context: "You look in the upper right. Should i check what's inside?",
+            truth: box,
+            image: 'img/closedbox.jpg',
+            slot1: {},
+            slot2: {},
+            slot3: {}
+          },
         },
-        path2: {
-          slot1: {},
-          slot2: {},
-          slot3: {},
-          image: "",
-          context: ""
+        getPlayer: function() {
+          if (game.players.player1.health > 0) {
+            currentPlayer = game.players.player1
+          }
+          else {
+            pickPath(slot1, slot2, slot3)
+            currentPlayer = game.players.player2
+
+          }
         },
-        path3: {
-          slot1: {},
-          slot2: {},
-          slot3: {},
-          image: "",
-          context: ""
-        },
-        getPlayer:
         players: {
           player1: {
             total: 0,
@@ -106,7 +131,7 @@
         }
       }
 
-
+game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
 
     </script>
   </body>
