@@ -1,0 +1,54 @@
+header {
+  text-align: center;
+  margin: 0 auto;
+  font-size: 50px;
+  color: darkred;
+  border: 2px solid darkred;
+  background: black;
+  font: Impact;
+}
+.container {
+  max-width: 1200px;
+  max-height: 510px;
+  display: table;
+  margin: 0 auto;
+}
+.context1{
+  width: 350px;
+  height: 250px;
+  float: right;
+  display: inline-block;
+  border: 2px solid white;
+  color: darkred;
+  background: black;
+}
+.context2{
+  width: 350px;
+  height: 250px;
+  float: right;
+  display: inline-block;
+  border: 2px solid white;
+  color: darkred;
+  background: black;
+}
+.context3{
+  width: 350px;
+  height: 250px;
+  float: right;
+  display: block;
+  border: 2px solid white;
+  color: darkred;
+  background: black;
+}
+.slot {
+  width: 350px;
+  height: 500px;
+  float: right;
+  display: block;
+  background: black;
+  border: 2px solid white;
+  color: darkred;
+}
+/*.left {
+  float: left;
+}*/

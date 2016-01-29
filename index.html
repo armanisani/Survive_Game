@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Survive Game</title>
+    <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+
+  </head>
+  <body>
+    <Header> Survive </header>
+      <div class="container">
+        <div class="slot" id="slot3">left</div>
+        <div class="slot" id="slot2">middle</div>
+        <div class="slot" id="slot1">right</div>
+      </div>
+      <footer class="container">
+        <div class="context3">3</div>
+        <div class="context2">2</div>
+        <div class="context1">1</div>
+      </footer>
+    <script>
+      game = {
+        door: $('#door')
+        slots: $('.slot'),
+        slot1: $('#slots1'),
+        slot2: $('#slot2'),
+        slot3: $('#slot3'),
+        context1: $('.context1'),
+        context2: $('.context2'),
+        context3: $('.context3'),
+        nextPath1: function(firstPath) {game.pickPath(firstPath.slot1, firstPath.slot2, firstPath.slot3)},
+        nextPath2: function(secondPath) {game.pickPath(secondPath.slot1, secondPath.slot2, secondPath.slot3)},
+        nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, secondPath.slot2, secondPath.slot3)},
+        pickPath: function(first, second, third) {
+          if ($(this).truth == true) {
+            $(this).slot1.on('click',function(){game.nextPath1(first)})
+            $(this).slot1.text(first.image)
+            $(this).context1.text(first.context)
+          }
+          if (game.)
+          $(this).slot2.on('click',function(){game.nextPath2(second)})
+          $(this).slot2.text(second.image)
+          $(this).context2.text(second.context)
+          $(this).slot3.on('click',function(){game.nextPath3(third)})
+          $(this).slot3.text(third.image)
+          $(this).context3.text(third.context)
+        },
+        path1: {
+          slot1: {
+            truth: true,
+            context: "You look to your left and notice a wooden door. You try to open it and it's locked. Should I take a closer look?",
+            image: <img src="img/Door.png" alt="Door" id= "door"/>,
+            slot1: {
+              truth: if (game.players.)
+              context: ""
+              image:
+              slot1: {}
+              slot2: {},
+              slot3: {}
+            },
+            slot2: {},
+            slot3: {}
+          },
+          slot2: {},
+          slot3: {},
+          image: "",
+          context: ""
+        },
+        path2: {
+          slot1: {},
+          slot2: {},
+          slot3: {},
+          image: "",
+          context: ""
+        },
+        path3: {
+          slot1: {},
+          slot2: {},
+          slot3: {},
+          image: "",
+          context: ""
+        },
+        getPlayer:
+        players: {
+          player1: {
+            total: 0,
+            health: 10,
+            gun: false,
+            axe: false,
+            icepick: false,
+            radio: false,
+            rope: false,
+            man: false
+          },
+          player2: {
+            total: 0,
+            health: 10,
+            gun: false,
+            axe: false,
+            icepick: false,
+            radio: false,
+            rope: false,
+            man: false
+          }
+        }
+      }
+
+
+
+    </script>
+  </body>
+</html>
