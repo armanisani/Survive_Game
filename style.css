@@ -7,6 +7,7 @@ header {
   background: black;
   font: Impact;
 }
+
 .container {
   max-width: 1200px;
   max-height: 510px;
@@ -33,6 +34,7 @@ header {
   background: black;
   font-size: 30px;
 }
+
 .context3{
   width: 350px;
   height: 250px;
@@ -52,9 +54,7 @@ header {
   border: 2px solid white;
   color: darkred;
 }
-.door {
 
-}
 /*.left {
   float: left;
 }*/

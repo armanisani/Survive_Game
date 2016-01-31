@@ -8,6 +8,8 @@
   </head>
   <body>
     <Header> Survive </header>
+
+    </div>
       <div class="container">
         <img src="" alt="slot3" class="slot" id="slot3" />
         <img src="" alt="slot2" class="slot" id="slot2" />
@@ -19,19 +21,21 @@
         <div class="context1">1</div>
       </footer>
     <script>
-    var box = 0
-    var box = function() {if(box = 0) {
-      return true
-      box += 1
-    }
-    else {
-      return false
-    }}
-    var axe = function() {
-      if (currentPlayer.axe = true) {
-      return true
-    }}
+    var currentPlayer
+      var box2 = 0
+      var box = function() {
+        if(box2 === 0) {
+        box += 1
+        return true
+      }
+      else {
+        return false
+      }}
+      var boxRun = box()
+
+
       game = {
+        currentPlayer: null,
         slots: $('.slot'),
         slot1: $('#slot1'),
         slot2: $('#slot2'),
@@ -41,24 +45,39 @@
         context3: $('.context3'),
         nextPath1: function(firstPath) {game.pickPath(firstPath.slot1, firstPath.slot2, firstPath.slot3)},
         nextPath2: function(secondPath) {game.pickPath(secondPath.slot1, secondPath.slot2, secondPath.slot3)},
-        nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, secondPath.slot2, secondPath.slot3)},
+        nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, thirdPath.slot2, thirdPath.slot3)},
         pickPath: function(first, second, third) {
           game.getPlayer()
+          game.slot1.unbind('click')
+          game.slot2.unbind('click')
+          game.slot3.unbind('click')
           if (first.truth == true) {
-            game.slot1.on('click',function(){game.nextPath1(first)})
+            game.slot1.on('click',function(){
+              game.nextPath1(first)})
           }
           game.slot1.attr('src', first.image)
           game.context1.text(first.context)
+          if (first.popup == true) {
+            first['pop']()
+          }
           if (second.truth == true) {
-          game.slot2.on('click',function(){game.nextPath2(second)})
+          game.slot2.on('click',function(){
+            game.nextPath2(second)})
           }
           game.slot2.attr('src', second.image)
           game.context2.text(second.context)
+          if (second.popup == true) {
+            second['pop']()
+          }
           if (third.truth == true) {
-          game.slot3.on('click',function(){game.nextPath3(third)})
+            game.slot3.on('click',function(){
+            game.nextPath3(third)})
           }
           game.slot3.attr('src', third.image)
           game.context3.text(third.context)
+          if (third.popup == true) {
+            third['pop']()
+          }
         },
         paths: {
           slot1: {
@@ -66,35 +85,105 @@
             context: "You look to your left and notice a wooden door. You try to open it and it's locked. Should I take a closer look?",
             image: 'img/Door.png',
             slot1: {
-              truth: axe,
-              context: "Use the axe you found and axe your way through the door",
+              truth: axeRun,
+              context: "Use the axe you bought and axe your way through the door",
               image: 'img/fire axe.jpg',
+              slot1: {
+                context: "Use the axe to chop the guard who hasn't noticed you yet.",
+                truth: axeRun,
+                image: 'img/fire axe.jpg',
+                slot1: {},
+                slot2: {},
+                slot3: {}
+              },
+              slot2: {
+                context: "Use the icepick to open the cell to free the man locked inside",
+                truth: icepickRun,
+                image: 'img/icepick.jpg',
+                slot1: {},
+                slot2: {},
+                slot3: {}
+              },
+              slot3: {
+                // this one kills the player
+                context: "Try to sneak by the guard to reach the door",
+                trigger: "death"
+              }
+            },
+            slot2: {
+              truth: icepickRun,
+              context: "Use the icepick you bought to try to picklock your way through the door",
+              image: "img/icepick.jpg",
+              slot1: {},
+              slot2: {},
+              slot3: {}
+            },
+            slot3: {
+              truth: true,
+              context: "Knock on the door and see if someone opens it up",
+              image: "img/knock.jpg",
+              slot1: {},
+              slot2: {},
+              slot3: {}
+            }
+          },
+          slot2: {
+            context: "You notice a box in the corner of the room. Should i check what's inside?",
+            truth: boxRun,
+            image: 'img/closedbox.jpg',
+            // need to set the slot to be able to turn weapon slots into true and bring them back to the start
+            slot1: {
+              context: "Trade your golden coin for an fire axe. I might be able to axe something later",
+              truth: true,
+              image: "img/fire axe.jpg",
+              player: axeChange,
               slot1: {},
               slot2: {},
               slot3: {}
             },
             slot2: {
-              truth: "",
-              context: "",
-              image: ""
+              context: "Trade your golden coin for an icepick. Not sure what i'll use this for, but it might come in handy",
+              truth: true,
+              image: "img/icepick.jpg",
+              slot1:{},
+              slot2: {},
+              slot3: {}
             },
-            slot3: {}
-          },
-          slot2: {
-            context: "You notice a box in the corner of the room. Should i check what's inside?",
-            truth: box,
-            image: 'img/closedbox.jpg',
-            slot1: {},
-            slot2: {},
-            slot3: {}
+            slot3: {
+              context: "Trade your golden coin for a hammer. I can't think of a time that i'll need this besides hammertime.",
+              truth: true,
+              image: "img/hammer.jpg"
+            }
           },
           slot3: {
-            context: "You look in the upper right. Should i check what's inside?",
-            truth: box,
-            image: 'img/closedbox.jpg',
-            slot1: {},
-            slot2: {},
-            slot3: {}
+            context: "You look in the upper right corner and noticed a closed vent. I try to open it and it won't budge Should i take a closer look?",
+            truth: true,
+            image: 'img/vent.jpg',
+            slot1: {
+              context: "I can try to use my hammer to yank it open",
+              truth: hammerRun,
+              image: 'img/hammer.jpg',
+              slot1: {},
+              slot2: {},
+              slot3: {}
+            },
+            slot2: {
+              context: "Maybe i can smash it open with my bare fists!!!!!",
+              truth: true,
+              image: 'img/punch.jpg',
+              slot1: {},
+              slot2: {},
+              slot3: {}
+
+            },
+            slot3: {
+              context: "I should call out to see what that noise was",
+              truth: true,
+              image: 'img/scream.jpg',
+              slot1: {},
+              slot2: {},
+              slot3: {}
+            }
           },
         },
         getPlayer: function() {
@@ -127,9 +216,34 @@
             radio: false,
             rope: false,
             man: false
-          }
+          },
         }
       }
+      var axe = function() {
+        game.getPlayer()
+        if (currentPlayer.axe === true) {
+        return true
+      }
+        else {return false}}
+      var icepick = function() {
+        game.getPlayer()
+        if (currentPlayer.icepick === true) {
+          return true
+        }
+        else {return false}
+      }
+      var hammer = function() {
+        game.getPlayer()
+        if (currentPlayer.hammer === true) {
+          return true
+        }
+        else {return false}
+      }
+      var hammerRun = hammer()
+      var icepickRun = icepick()
+      var axeRun = axe()
+      var axeTrue = function () {currentPlayer.axe = true}
+      var axeChange = axeTrue()
 
 game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
 
