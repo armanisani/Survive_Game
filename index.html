@@ -5,6 +5,8 @@
     <title>Survive Game</title>
     <link rel="stylesheet" href="style.css" media="screen" title="no title" charset="utf-8">
     <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" media="screen" title="no title" charset="utf-8">
+    <script src="js/bootstrap.min.js"></script>
   </head>
   <body>
     <Header> Survive </header>
@@ -20,15 +22,35 @@
         <div class="context2">2</div>
         <div class="context1">1</div>
       </footer>
+      <div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">EVENT</h4>
+            </div>
+            <div class="modal-body" id="pone">
+              <p>One fine body&hellip;</p>
+            </div>
+            <div class="modal-body" id="ptwo">
+              <p></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
     <script>
     var currentPlayer
       var box2 = 0
       var box = function() {
-        if(box2 === 0) {
-        box += 1
+        if(box2 <= 1) {
+        box2 += 1
         return true
       }
       else {
+        game.paths.slot2.truth = false
         return false
       }}
       var boxRun = box()
@@ -46,6 +68,9 @@
         nextPath2: function(secondPath) {game.pickPath(secondPath.slot1, secondPath.slot2, secondPath.slot3)},
         nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, thirdPath.slot2, thirdPath.slot3)},
         pickPath: function(first, second, third) {
+          axe()
+          icepick()
+          box()
           game.getPlayer()
           game.slot2.unbind('click')
           game.slot3.unbind('click')
@@ -59,13 +84,15 @@
           }
           if (first.truth == true) {
             game.slot1.on('click', function(){
-              game.nextPath1(first)})
+              $('#myModal').modal()
+              game.nextPath1(first)
+              $('#ptwo').text(first.textPop)
+              $('#pone').html('<img src ="' + first.imagePop + '">')
+              })
           }
           game.slot1.attr('src', first.image)
           game.context1.text(first.context)
-          if (first.popup == true) {
-            first['pop']()
-          }
+
           // second
           if (second.axe == true) {axeTrue()}
           if (second.icepick == true) {icepickTrue()}
@@ -75,13 +102,13 @@
           }
           if (second.truth == true) {
           game.slot2.on('click',function(){
-            game.nextPath2(second)})
+            $('#myModal').modal()
+            game.nextPath2(second)
+            $('.modal-body').html('<img src ="' + second.imagePop + '">')
+            $('.modal-body').text(second.textPop)})
           }
           game.slot2.attr('src', second.image)
           game.context2.text(second.context)
-          if (second.popup == true) {
-            second['pop']()
-          }
           // third
           if (third.axe == true) {axeTrue()}
           if (third.icepick == true) {icepickTrue()}
@@ -91,70 +118,127 @@
           }
           if (third.truth == true) {
             game.slot3.on('click',function(){
-            game.nextPath3(third)})
+            $('#myModal').modal()
+            game.nextPath3(third)
+            $('.modal-body').html('<img src ="' + third.imagePop + '">')
+            $('.modal-body').text(third.textPop)})
           }
           game.slot3.attr('src', third.image)
           game.context3.text(third.context)
-          if (third.popup == true) {
-            third['pop']()
-          }
         },
         paths: {
           slot1: {
+            // 1
+            imagePop: 'img/Door.png',
+            textPop: "After taking a closer look you notice the door is locked and it won't budge open.",
             truth: true,
-            context: "You look to your left and notice a wooden door. You try to open it and it's locked. Should I take a closer look?",
+            context: "You look to your left and notice a wooden door. Should I take a closer look?",
             image: 'img/Door.png',
             slot1: {
-              truth: true,
+              // 11
+              truth: false,
               context: "Use the axe you bought and axe your way through the door",
               image: 'img/fire axe.jpg',
               slot1: {
+                // 111
                 context: "Use the axe to chop the guard who hasn't noticed you yet.",
-                truth: axeRun,
+                truth: true,
                 image: 'img/fire axe.jpg',
                 slot1: {
+                  // 1111
                   context: "",
                 },
-                slot2: {},
-                slot3: {}
+                slot2: {
+                  // 1112
+                },
+                slot3: {
+                  // 1113
+                }
               },
               slot2: {
-                context: "Use the icepick to open the cell to free the man locked inside",
-                truth: icepickRun,
+                // 112
+                context: "Use the axe to break the cell lock to free the man locked inside",
+                truth: true,
                 image: 'img/icepick.jpg',
                 slot1: {},
                 slot2: {},
                 slot3: {}
               },
               slot3: {
-                // this one kills the player
+                // this one kills the player 113
                 context: "Try to sneak by the guard to reach the door",
                 trigger: "death"
               }
             },
+
             slot2: {
-              truth: icepickRun,
+              // 12
+              truth: false,
               context: "Use the icepick you bought to try to picklock your way through the door",
               image: "img/icepick.jpg",
-              slot1: {},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                // 121
+                context: "Kill the guard by icepicking him in the head.",
+                truth: true,
+                image: 'img/icepick.jpg',
+                slot1: {
+                  // 1211
+                  context: "",
+                },
+                slot2: {
+                  // 1212
+                },
+                slot3: {
+                  // 1213
+                }
+
+              },
+              slot2: {
+                // opens when user has hammer and icepick 122
+                context: "Use the icepick and hammer to pick the cell lock to free the man locked inside",
+                truth: false,
+                image: 'img/icepick.jpg',
+                slot1: {
+                  // 1221
+                },
+                slot2: {
+                  // 1222
+                },
+                slot3: {
+                  // 1223
+                }
+              },
+              slot3: {
+                // 123
+
+              }
             },
             slot3: {
+              // 13
               truth: true,
               context: "Knock on the door and see if someone opens it up",
               image: "img/knock.jpg",
-              slot1: {},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                // 131
+              },
+              slot2: {
+                // 132
+              },
+              slot3: {
+                // 133
+              }
             }
           },
           slot2: {
-            context: "You notice a box in the corner of the room. Should i check what's inside?",
-            truth: boxRun,
+            // 2
+            textPop: "As you walk toward the box. BAM! A man pops out of the box screaming 'Chocolate!!' You take a step back to a safe distance while the man's screaming for chocolate is only getting louder, in your attempt to calm him down with you reach into your pocket to see if you can give him something to calm his nerves and in your amazement find" +  + "chocolate bars in your pocket. Maybe i can trade him?",
+            imagePop: "box.png",
+            context: "You notice a box in the corner of the room. Walk close to examine the box",
+            truth: true,
             image: 'img/closedbox.jpg',
             // need to set the slot to be able to turn weapon slots into true and bring them back to the start
             slot1: {
+              // 21
               context: "Trade your golden coin for an fire axe. I might be able to axe something later",
               truth: true,
               image: "img/fire axe.jpg",
@@ -163,6 +247,7 @@
               slot3: {axe: true, restart: true}
             },
             slot2: {
+              // 22
               context: "Trade your golden coin for an icepick. Not sure what i'll use this for, but it might come in handy",
               truth: true,
               image: "img/icepick.jpg",
@@ -171,6 +256,7 @@
               slot3:{icepick: true, restart: true}
             },
             slot3: {
+              // 23
               context: "Trade your golden coin for a hammer. I can't think of a time that i'll need this besides hammertime.",
               truth: true,
               slot1:{hammer: true, restart: true},
@@ -180,33 +266,53 @@
             }
           },
           slot3: {
+            // 3
             context: "You look in the upper right corner and noticed a closed vent. I try to open it and it won't budge Should i take a closer look?",
             truth: true,
             image: 'img/vent.jpg',
             slot1: {
+              // 31
               context: "I can try to use my hammer to yank it open",
               truth: hammerRun,
               image: 'img/hammer.jpg',
-              slot1: {},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                // 311
+              },
+              slot2: {
+                // 312
+              },
+              slot3: {
+                // 313
+              }
             },
             slot2: {
+              // 32
               context: "Maybe i can smash it open with my bare fists!!!!!",
               truth: true,
               image: 'img/punch.jpg',
-              slot1: {},
+              slot1: {
+                // 321
+              },
               slot2: {},
+              // 322
               slot3: {}
+              // 323
 
             },
             slot3: {
+              // 33
               context: "I should call out to see what that noise was",
               truth: true,
               image: 'img/scream.jpg',
-              slot1: {},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                // 331
+              },
+              slot2: {
+                // 332
+              },
+              slot3: {
+                // 333
+              }
             }
           },
         },
@@ -228,7 +334,8 @@
             icepick: false,
             radio: false,
             rope: false,
-            man: false
+            man: false,
+            chocolate: Math.floor((Math.random() * 3))
           },
           player2: {
             total: 0,
@@ -238,20 +345,26 @@
             icepick: false,
             radio: false,
             rope: false,
-            man: false
+            man: false,
+            chocolate: Math.floor((Math.random() * 3))
           },
         }
       }
-      var axeRun = false
+      var icepickHammer = function() {
+        if ((currentPlayer.icepick == true) && (currentPlayer.hammer == true)) {
+          game.paths.slot1.slot2.slot2.truth = true
+        }
+      }
       var axe = function() {
         if (currentPlayer.axe == true) {
-        axeRun = true
-        console.log("run")
-      }
-        else {axeRun = false}}
+          game.paths.slot1.slot1.truth = true
+        }
+        else {return false}}
       var icepick = function() {
-        game.getPlayer()
         if (currentPlayer.icepick === true) {
+          game.paths.slot1.slot2.truth = true
+          game.paths.slot1.slot1.slot2.truth = true
+          game.paths.slot1.slot2.slot1.truth = true
           return true
         }
         else {return false;}
@@ -264,11 +377,11 @@
         else {return false}
       }
       var hammerRun = hammer()
-      var icepickRun = icepick()
       var axeTrue = function () {currentPlayer.axe = true}
       var icepickTrue = function () {currentPlayer.icepick = true}
       var hammerTrue = function () {currentPlayer.hammer = true}
 
+// make all the above into a function and change player inventory to functions instead of true and false
 
 
 game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
