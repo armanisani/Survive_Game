@@ -35,7 +35,6 @@
 
 
       game = {
-        currentPlayer: null,
         slots: $('.slot'),
         slot1: $('#slot1'),
         slot2: $('#slot2'),
@@ -48,17 +47,31 @@
         nextPath3: function(thirdPath) {game.pickPath(thirdPath.slot1, thirdPath.slot2, thirdPath.slot3)},
         pickPath: function(first, second, third) {
           game.getPlayer()
-          game.slot1.unbind('click')
           game.slot2.unbind('click')
           game.slot3.unbind('click')
+          game.slot1.unbind('click')
+          // first
+          if (first.axe == true) {axeTrue()}
+          if (first.icepick == true) {icepickTrue()}
+          if (first.hammer == true) {hammerTrue()}
+          if (first.restart == true) {
+            game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
+          }
           if (first.truth == true) {
-            game.slot1.on('click',function(){
+            game.slot1.on('click', function(){
               game.nextPath1(first)})
           }
           game.slot1.attr('src', first.image)
           game.context1.text(first.context)
           if (first.popup == true) {
             first['pop']()
+          }
+          // second
+          if (second.axe == true) {axeTrue()}
+          if (second.icepick == true) {icepickTrue()}
+          if (second.hammer == true) {hammerTrue()}
+          if (second.restart == true) {
+            game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
           }
           if (second.truth == true) {
           game.slot2.on('click',function(){
@@ -68,6 +81,13 @@
           game.context2.text(second.context)
           if (second.popup == true) {
             second['pop']()
+          }
+          // third
+          if (third.axe == true) {axeTrue()}
+          if (third.icepick == true) {icepickTrue()}
+          if (third.hammer == true) {hammerTrue()}
+          if (third.restart == true) {
+            game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
           }
           if (third.truth == true) {
             game.slot3.on('click',function(){
@@ -85,14 +105,16 @@
             context: "You look to your left and notice a wooden door. You try to open it and it's locked. Should I take a closer look?",
             image: 'img/Door.png',
             slot1: {
-              truth: axeRun,
+              truth: true,
               context: "Use the axe you bought and axe your way through the door",
               image: 'img/fire axe.jpg',
               slot1: {
                 context: "Use the axe to chop the guard who hasn't noticed you yet.",
                 truth: axeRun,
                 image: 'img/fire axe.jpg',
-                slot1: {},
+                slot1: {
+                  context: "",
+                },
                 slot2: {},
                 slot3: {}
               },
@@ -136,22 +158,24 @@
               context: "Trade your golden coin for an fire axe. I might be able to axe something later",
               truth: true,
               image: "img/fire axe.jpg",
-              player: axeChange,
-              slot1: {},
-              slot2: {},
-              slot3: {}
+              slot1: {axe: true, restart: true},
+              slot2: {axe: true, restart: true},
+              slot3: {axe: true, restart: true}
             },
             slot2: {
               context: "Trade your golden coin for an icepick. Not sure what i'll use this for, but it might come in handy",
               truth: true,
               image: "img/icepick.jpg",
-              slot1:{},
-              slot2: {},
-              slot3: {}
+              slot1:{icepick: true, restart: true},
+              slot2:{icepick: true, restart: true},
+              slot3:{icepick: true, restart: true}
             },
             slot3: {
               context: "Trade your golden coin for a hammer. I can't think of a time that i'll need this besides hammertime.",
               truth: true,
+              slot1:{hammer: true, restart: true},
+              slot2:{hammer: true, restart: true},
+              slot3:{hammer: true, restart: true},
               image: "img/hammer.jpg"
             }
           },
@@ -191,7 +215,6 @@
             currentPlayer = game.players.player1
           }
           else {
-            pickPath(slot1, slot2, slot3)
             currentPlayer = game.players.player2
 
           }
@@ -219,18 +242,19 @@
           },
         }
       }
+      var axeRun = false
       var axe = function() {
-        game.getPlayer()
-        if (currentPlayer.axe === true) {
-        return true
+        if (currentPlayer.axe == true) {
+        axeRun = true
+        console.log("run")
       }
-        else {return false}}
+        else {axeRun = false}}
       var icepick = function() {
         game.getPlayer()
         if (currentPlayer.icepick === true) {
           return true
         }
-        else {return false}
+        else {return false;}
       }
       var hammer = function() {
         game.getPlayer()
@@ -241,9 +265,11 @@
       }
       var hammerRun = hammer()
       var icepickRun = icepick()
-      var axeRun = axe()
       var axeTrue = function () {currentPlayer.axe = true}
-      var axeChange = axeTrue()
+      var icepickTrue = function () {currentPlayer.icepick = true}
+      var hammerTrue = function () {currentPlayer.hammer = true}
+
+
 
 game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
 
