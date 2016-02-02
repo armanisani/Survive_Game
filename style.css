@@ -9,57 +9,61 @@ header {
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 700px;
   max-height: 510px;
   display: table;
   margin: 0 auto;
 }
 .context1{
-  width: 350px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   float: right;
   display: inline-block;
   border: 2px solid white;
   color: darkred;
   background: black;
-  font-size: 30px;
+  font-size: 20px;
+  margin: 0 10px 0 10px;
 }
 .context2{
-  width: 350px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   float: right;
   display: inline-block;
   border: 2px solid white;
   color: darkred;
   background: black;
-  font-size: 30px;
+  font-size: 20px;
+  margin: 0 10px 0 10px;
 }
 
 .context3{
-  width: 350px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
   float: right;
   display: block;
   border: 2px solid white;
   color: darkred;
   background: black;
-  font-size: 30px;
+  font-size: 20px;
+  margin: 0 10px 0 10px;
+  
 }
 .slot {
-  width: 350px;
-  height: 500px;
+  width: 200px;
+  height: 350px;
   float: right;
   display: block;
   background: black;
   border: 2px solid white;
   color: darkred;
+  margin: 0 10px 0 10px;
 }
-#pone {
-  width: 350px;
-  height: 500px;
+.pone {
   margin: 0 auto;
+  display: table;
 }
-#ptwo {
+.ptwo {
   text-align: center;
   font-size: 25px;
 }

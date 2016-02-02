@@ -29,10 +29,10 @@
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               <h4 class="modal-title">EVENT</h4>
             </div>
-            <div class="modal-body" id="pone">
+            <div class="modal-body pone">
               <p>One fine body&hellip;</p>
             </div>
-            <div class="modal-body" id="ptwo">
+            <div class="modal-body ptwo">
               <p></p>
             </div>
             <div class="modal-footer">
@@ -42,20 +42,8 @@
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
     <script>
+    var stop = 0
     var currentPlayer
-      var box2 = 0
-      var box = function() {
-        if(box2 <= 1) {
-        box2 += 1
-        return true
-      }
-      else {
-        game.paths.slot2.truth = false
-        return false
-      }}
-      var boxRun = box()
-
-
       game = {
         slots: $('.slot'),
         slot1: $('#slot1'),
@@ -70,7 +58,6 @@
         pickPath: function(first, second, third) {
           axe()
           icepick()
-          box()
           game.getPlayer()
           game.slot2.unbind('click')
           game.slot3.unbind('click')
@@ -79,15 +66,20 @@
           if (first.axe == true) {axeTrue()}
           if (first.icepick == true) {icepickTrue()}
           if (first.hammer == true) {hammerTrue()}
+          if (first.gun == true) {gunTrue()}
+          if (first.man == true) {manTrue()}
           if (first.restart == true) {
             game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
           }
+          if (first.health == true) {
+          healthKill(first)
+        console.log("im running")}
           if (first.truth == true) {
             game.slot1.on('click', function(){
               $('#myModal').modal()
               game.nextPath1(first)
-              $('#ptwo').text(first.textPop)
-              $('#pone').html('<img src ="' + first.imagePop + '">')
+              $('.ptwo').text(first.textPop)
+              $('.pone').html('<img src ="' + first.imagePop + '">')
               })
           }
           game.slot1.attr('src', first.image)
@@ -97,15 +89,22 @@
           if (second.axe == true) {axeTrue()}
           if (second.icepick == true) {icepickTrue()}
           if (second.hammer == true) {hammerTrue()}
+          if (second.gun == true) {gunTrue()}
+          if (second.man == true) {manTrue()}
           if (second.restart == true) {
             game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
           }
+          if (second.health == true){
+          healthKill(second)
+          console.log("im running")
+        }
           if (second.truth == true) {
           game.slot2.on('click',function(){
+            box()
             $('#myModal').modal()
             game.nextPath2(second)
-            $('.modal-body').html('<img src ="' + second.imagePop + '">')
-            $('.modal-body').text(second.textPop)})
+            $('.ptwo').text(second.textPop)
+            $('.pone').html('<img src ="' + second.imagePop + '">')})
           }
           game.slot2.attr('src', second.image)
           game.context2.text(second.context)
@@ -113,15 +112,20 @@
           if (third.axe == true) {axeTrue()}
           if (third.icepick == true) {icepickTrue()}
           if (third.hammer == true) {hammerTrue()}
+          if (third.gun == true) {gunTrue()}
+          if (third.man == true) {manTrue()}
           if (third.restart == true) {
             game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
           }
+          if (third.health == true){
+          healthKill(third)
+        console.log("im running")}
           if (third.truth == true) {
             game.slot3.on('click',function(){
             $('#myModal').modal()
             game.nextPath3(third)
-            $('.modal-body').html('<img src ="' + third.imagePop + '">')
-            $('.modal-body').text(third.textPop)})
+            $('.ptwo').text(third.textPop)
+            $('.pone').html('<img src ="' + third.imagePop + '">')})
           }
           game.slot3.attr('src', third.image)
           game.context3.text(third.context)
@@ -132,17 +136,20 @@
             imagePop: 'img/Door.png',
             textPop: "After taking a closer look you notice the door is locked and it won't budge open.",
             truth: true,
+            health: false,
             context: "You look to your left and notice a wooden door. Should I take a closer look?",
             image: 'img/Door.png',
             slot1: {
               // 11
               truth: false,
+              health: false,
               context: "Use the axe you bought and axe your way through the door",
               image: 'img/fire axe.jpg',
               slot1: {
                 // 111
                 context: "Use the axe to chop the guard who hasn't noticed you yet.",
                 truth: true,
+                health: false,
                 image: 'img/fire axe.jpg',
                 slot1: {
                   // 1111
@@ -159,27 +166,36 @@
                 // 112
                 context: "Use the axe to break the cell lock to free the man locked inside",
                 truth: true,
+                health: false,
                 image: 'img/icepick.jpg',
-                slot1: {},
-                slot2: {},
-                slot3: {}
+                slot1: {
+                  // 1121
+                },
+                slot2: {
+                  // 1122
+                },
+                slot3: {
+                  // 1123
+                }
               },
               slot3: {
                 // this one kills the player 113
                 context: "Try to sneak by the guard to reach the door",
-                trigger: "death"
+                trigger: "death",
               }
             },
 
             slot2: {
               // 12
               truth: false,
+              health: false,
               context: "Use the icepick you bought to try to picklock your way through the door",
               image: "img/icepick.jpg",
               slot1: {
                 // 121
                 context: "Kill the guard by icepicking him in the head.",
                 truth: true,
+                health: false,
                 image: 'img/icepick.jpg',
                 slot1: {
                   // 1211
@@ -197,6 +213,7 @@
                 // opens when user has hammer and icepick 122
                 context: "Use the icepick and hammer to pick the cell lock to free the man locked inside",
                 truth: false,
+                health: false,
                 image: 'img/icepick.jpg',
                 slot1: {
                   // 1221
@@ -216,6 +233,7 @@
             slot3: {
               // 13
               truth: true,
+              health: false,
               context: "Knock on the door and see if someone opens it up",
               image: "img/knock.jpg",
               slot1: {
@@ -231,15 +249,16 @@
           },
           slot2: {
             // 2
-            textPop: "As you walk toward the box. BAM! A man pops out of the box screaming 'Chocolate!!' You take a step back to a safe distance while the man's screaming for chocolate is only getting louder, in your attempt to calm him down with you reach into your pocket to see if you can give him something to calm his nerves and in your amazement find" +  + "chocolate bars in your pocket. Maybe i can trade him?",
-            imagePop: "box.png",
+            textPop: "As you walk towards the box. You notice a man peeking out of the box. 'STOP!' he yelled... You got any chocolate? I'll trade you. Since i'm trying to dig out of here the icepick's going to cost you 2 chocolate bars",
+            imagePop: "img/box.png",
             context: "You notice a box in the corner of the room. Walk close to examine the box",
             truth: true,
             image: 'img/closedbox.jpg',
-            // need to set the slot to be able to turn weapon slots into true and bring them back to the start
             slot1: {
               // 21
-              context: "Trade your golden coin for an fire axe. I might be able to axe something later",
+              textPop: "You traded a chocolate bar for an axe",
+              imagePop: "img/fire axe.jpg",
+              context: "Trade a choclate bar for an fire axe. I might be able to axe something later",
               truth: true,
               image: "img/fire axe.jpg",
               slot1: {axe: true, restart: true},
@@ -248,6 +267,8 @@
             },
             slot2: {
               // 22
+              textPop: "You traded a chocolate bar for an icepick",
+              imagePop: "img/icepick.jpg",
               context: "Trade your golden coin for an icepick. Not sure what i'll use this for, but it might come in handy",
               truth: true,
               image: "img/icepick.jpg",
@@ -257,6 +278,8 @@
             },
             slot3: {
               // 23
+              textPop: "You traded a chocolate bar for an hammer",
+              imagePop: "img/hammer.jpg",
               context: "Trade your golden coin for a hammer. I can't think of a time that i'll need this besides hammertime.",
               truth: true,
               slot1:{hammer: true, restart: true},
@@ -267,13 +290,19 @@
           },
           slot3: {
             // 3
-            context: "You look in the upper right corner and noticed a closed vent. I try to open it and it won't budge Should i take a closer look?",
+            imagePop: "img/vent.jpg",
+            textPop: "You walk towards the vent and try to open it, but it won't budge. You start to hear noise coming from the door",
+            context: "You look in the upper right corner and noticed a closed vent. Should i take a closer look?",
             truth: true,
+            health: false,
             image: 'img/vent.jpg',
             slot1: {
               // 31
+              textPop: "You use the hammer to pry open the vent and it works!",
+              imagePop: "img/fire axe.jpg",
               context: "I can try to use my hammer to yank it open",
-              truth: hammerRun,
+              truth: false,
+              health: false,
               image: 'img/hammer.jpg',
               slot1: {
                 // 311
@@ -287,28 +316,188 @@
             },
             slot2: {
               // 32
+              imagePop: "img/punch.jpg",
+              textPop: "I start reckless punching the vent like a maniac, and end up hurting myself. That hurt a lot. Fortuantely it worked. I crawled inside the vent and made my way through and am stopped by a large fan, and notice another passage to the right. What should i do?",
               context: "Maybe i can smash it open with my bare fists!!!!!",
+              health: false,
               truth: true,
               image: 'img/punch.jpg',
               slot1: {
                 // 321
+                imagePop: "img/hammer.jpg",
+                textPop: "It WORKED! The fan was jammed long enough for me to be able to get through and pull out the hammer from the other side. Blinded by the bright light i realized that i was outside the building and now in the middle of an airfield.",
+                context: "I can try to jam the fan with the hammer i bought from the crazy man",
+                image: "img/ventfan.jpg",
+                healthDMG: Math.floor(Math.random()*21),
+                truth: false,
+                health: true,
+                slot1: {},
+                slot2: {},
+                slot3: {}
               },
-              slot2: {},
-              // 322
+              slot2: {
+                // 322
+                imagePop: "img/punch.jpg",
+                textPop: "I started punching relentlessly and ended up cutting my hands really badly. That was a terrible idea.",
+                context: "Maybe i can punch the fan out with my muscles!!!",
+                image: "img/punch.jpg",
+                truth: true,
+                health: false,
+                slot1: {
+                  health: true,
+                  healthDMG: Math.floor(Math.random()*60),
+                },
+                slot2: {},
+                slot3: {}
+              },
               slot3: {}
               // 323
 
             },
             slot3: {
               // 33
+              imagePop: "img/soldier1.png",
+              textPop: "A large soldier walks into a room wielding a gun. 'Hey you!' He yelled. 'What are you doing?'",
               context: "I should call out to see what that noise was",
               truth: true,
+              health: false,
               image: 'img/scream.jpg',
               slot1: {
-                // 331
+                // 331 DEAD
+                imagePop: "img/dead.png",
+                textPop: "You went for the kudo chop to his neck, but he moved out of the way and shot you dead. GAME OVER",
+                context: "I should kudo chop him in the neck before he does something",
+                image: 'img/karatechop.jpg',
+                truth: true,
+                health: false,
+                slot1: {
+                  health: true,
+                  healthDMG: 100,
+                  restart: true
+                },
+                slot2: {restart: true},
+                slot3: {restart: true}
+                // DEAD
               },
               slot2: {
                 // 332
+                imagePop: "img/soldier fallen.png",
+                health: false,
+                truth: true,
+                textPop: "That worked! He's temporary stunned, i need to act fast!",
+                context: "Charge kick him in the nuts before he can react",
+                image: "img/kick.jpeg",
+                slot1: {
+                  // 3321
+                  context: "Take the gun away from him",
+                  image: "img/gun.png",
+                  textPop: "You dive for his weapon, but he doesn't give it up without a fight. After a short brawl you were able to snag the weapon off him and killed the soldier. Once you caught your breath you exited through the door entering a long hallway full of empty cells and noticed another door at the end. As you walked towards the door you noticed one of the cells actually had a man in it. He's about twice your size, and hasn't said a word since you both noticed eachother. What should i do?",
+                  imagePop: "img/gun.png",
+                  health: false,
+                  truth: true,
+                  slot1:{
+                    gun: true,
+                    health: true,
+                    healthDMG: Math.floor(Math.random()*60),
+                    truth: true,
+                    context: "Find a way to break the man out",
+                    image: "img/man.png",
+                    textPop: "I decided that my best luck to get him out was to search the soldier I killed earlier and with my luck I had found just the one. After opening his cell the both of us decided that our best luck for survival was to help eachother escape. We agreed and exited out of door at the end of the hallway right from the frying pan into the fire. As I opened the door we had just stepped into dinning hall full of 6 soldiers eating food off their trays. They all simultaneously looked up confused. I need to act fast, what should i do? ",
+                    imagePop: "img/soldiers.jpg",
+                    // dinning hall
+                    slot1: {
+                      // 3321
+                      man: true,
+                      context: "Flip one of the dinning tables over and take cover behind it",
+                      image: "img/cover.jpg",
+                      textPop: "You flip the table over before they have any chance to react and take cover behind it with the man. After we both got behind cover they all started to fire their bullets towards out table. That was a good move. I've got to act fast.",
+                      imagePop: "img/cover.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        // add kill man function
+                        context: "Make a run for the door",
+                        image: "img/running.jpg",
+                        textPop: "I ran towards the door leaving the man behind to fight for himself. As I ran away I was hit with a couple bullets, but was able to escape only with some scratches. Once I stepped outside the door I realized that this was some kind of military airport that they were holding us at. I need to think of a plan before those soldiers catch up to me.",
+                        imagePop: "img/airport.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          health: true,
+                          healthDMG: Math.floor(Math.random()*51),
+                        },
+                        slot2: {
+
+                        },
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Pull out your gun and start shooting at the soldiers while you have the element of surprise.",
+                        image: "img/shooting.jpg",
+                        textPop: "I still had the element of surprise on them i was able to pick off 3 easily. The other 3 were more difficult, we took a beating, but with the man's help we were able to persevere. After it all ended we bandaged our wounds and continued out the exit. Once we were outside i realized that we were at an airfield. We need to act fast before we are spotted.",
+                        imagePop: "img/airport.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          health: true,
+                          healthDMG: Math.floor(Math.random()*31),
+                        },
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Convince the man to take the charge while you run away.",
+                        image: 'img/talk.png',
+                        textPop: "After a lot of persuasion under gun fire, i successfully convinced the man to lead the charge. I felt guilty, but it was all about survival now. As the man charged i used that as my opportunity to escape. I was able to escape without taking gunfire, the man didn't make it. Out the exit i noticed that i was on an airfield. I need to come up with a plan before they catch up to me.",
+                        imagePop: "img/airport.jpg",
+                        man: true,
+                        truth: true,
+                        health: false,
+                        slot1: {},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      // add kill man function
+                      man: true,
+                      context: "Make a straight run for the door",
+                      image: "img/running.jpg",
+                      textPop: "I decided to make a straight run for the door before they could react in any way. It only kinda worked one of the soldiers was able to get a shoot on me, but i had escaped out the door. The man didn't make it. I realized that this was an airport, i need to act fast before they catch up to me.",
+                      imagePop: "img/airport.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*31)
+                      },
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Pull out your gun and attack before they get a chance to react.",
+                      image: 'img/shooting.jpg',
+                      health: false,
+                      truth: true,
+                      textPop: "You pull out your gun and start firing away. You were able to pick off most of them, but a few were able to grab their gun and fire back. Luckily the man charged them as well, but he got badly hurt. After we cleared the soldiers, we walked outside to realize that we were at an airport. I had to come up with a plan quick before others realized what had happened.",
+                      imagePop: "img/airport.jpg",
+                      slot1: {
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                      },
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2:{
+                    gun: true,
+                  },
+                  slot3:{
+                    gun: true,
+                  }
+                },
+                slot2: {},
+                slot3: {}
               },
               slot3: {
                 // 333
@@ -322,31 +511,39 @@
           }
           else {
             currentPlayer = game.players.player2
+            if (stop == 0) {
+              box()
+              stop += 1
+              game.paths.slot2.truth = true
+            }
 
           }
         },
         players: {
+          // maybe add a man key so that he can die with damage
           player1: {
+            name: "Player1",
             total: 0,
-            health: 10,
+            health: 100,
             gun: false,
             axe: false,
             icepick: false,
             radio: false,
             rope: false,
             man: false,
-            chocolate: Math.floor((Math.random() * 3))
+            chocolate: Math.floor((Math.random() * 4))
           },
           player2: {
+            name: "Player2",
             total: 0,
-            health: 10,
+            health: 100,
             gun: false,
             axe: false,
             icepick: false,
             radio: false,
             rope: false,
             man: false,
-            chocolate: Math.floor((Math.random() * 3))
+            chocolate: Math.floor((Math.random() * 4))
           },
         }
       }
@@ -372,16 +569,43 @@
       var hammer = function() {
         game.getPlayer()
         if (currentPlayer.hammer === true) {
+          game.paths.slot3.slot1.truth = true
+          game.paths.slot3.slot2.slot1.truth = true
           return true
         }
         else {return false}
       }
+      var box = function() {
+        if(currentPlayer.chocolate != 0) {
+        currentPlayer.chocolate -= 1
+        return true
+      }
+      else {
+        game.paths.slot2.truth = false
+        return false
+      }}
       var hammerRun = hammer()
       var axeTrue = function () {currentPlayer.axe = true}
       var icepickTrue = function () {currentPlayer.icepick = true}
       var hammerTrue = function () {currentPlayer.hammer = true}
+      var gunTrue = function () {currentPlayer.gun = true}
+      var manTrue = function () {currentPlayer.man = true}
+      var random = function () {Math.floor(random() * 3)}
+      var light = Math.floor(Math.random()*21)
+      var medium = Math.floor(Math.random()*51)
+      var lethal = Math.floor(Math.random()*81)
+      var high = Math.floor(Math.random()*60)
+      var playerDie = function() {
+        game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
+        game.getPlayer()
+      }
+      var healthKill = function(which) {
+        var dmgNow = Number(which.healthDMG)
+        currentPlayer.health -= dmgNow
+        console.log(dmgNow)
+      }
 
-// make all the above into a function and change player inventory to functions instead of true and false
+// make all the above into a function and change player inventory to functions instead of true and false after game is complete on another branch
 
 
 game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
