@@ -2,70 +2,134 @@ header {
   text-align: center;
   margin: 0 auto;
   font-size: 50px;
-  color: darkred;
-  border: 2px solid darkred;
+  color: #1D5273;
+  border: 2px solid #1D5273;
   background: black;
-  font: Impact;
+  font-family: 'Candal', sans-serif;
+  border-radius: 25%
 }
-
-.container {
+body{
+  background-image: url('http://wallpaperlayer.com/img/2015/9/dark-background-images-5554-5814-hd-wallpapers.jpg')
+}
+.container2 {
   max-width: 700px;
   max-height: 510px;
   display: table;
   margin: 0 auto;
 }
 .context1{
+  font-family: 'Candal', sans-serif;
   width: 200px;
   height: 200px;
   float: right;
   display: inline-block;
-  border: 2px solid white;
-  color: darkred;
+  border: 2px solid #2B38A7;
+  color: #1D5273;
   background: black;
   font-size: 20px;
   margin: 0 10px 0 10px;
+  text-align: center;
 }
 .context2{
+  font-family: 'Candal', sans-serif;
   width: 200px;
   height: 200px;
   float: right;
   display: inline-block;
-  border: 2px solid white;
-  color: darkred;
+  border: 2px solid #2B38A7;
+  color: #1D5273;
   background: black;
   font-size: 20px;
   margin: 0 10px 0 10px;
+  text-align: center;
 }
 
 .context3{
+  font-family: 'Candal', sans-serif;
   width: 200px;
   height: 200px;
   float: right;
   display: block;
-  border: 2px solid white;
-  color: darkred;
+  border: 2px solid #2B38A7;
+  color: #1D5273;
   background: black;
   font-size: 20px;
   margin: 0 10px 0 10px;
-  
+  text-align: center;
+
 }
 .slot {
   width: 200px;
   height: 350px;
   float: right;
   display: block;
-  background: black;
-  border: 2px solid white;
-  color: darkred;
+  background: white;
+  border: 2px solid #2B38A7;
+  color: #1D5273;
   margin: 0 10px 0 10px;
+  border-radius: 25%;
 }
 .pone {
   margin: 0 auto;
   display: table;
+  background-color: black;
+  font-family: 'Candal', sans-serif;
 }
 .ptwo {
   text-align: center;
   font-size: 25px;
+  background-color: black;
+  color: #1D5273;
+  font-family: 'Candal', sans-serif;
+}
+.right {
+  float: right;
+  width: 25%;
+  color: #1D5273;
+  border: 5px dotted #1D5273;
+  margin: 0;
+}
+.rightText {
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Candal', sans-serif;
+}
+.left {
+  float: left;
+  width: 25%;
+  color: #1D5273;
+  border: 5px dotted #1D5273;
+  margin: 0;
+}
+.leftText {
+  text-align: center;
+  font-size: 50px;
+  font-family: 'Candal', sans-serif;
+}
+.pPoints{
+font-size: 35px;
+text-align: center;
+font-family: 'Candal', sans-serif;
+}
+.pHealth {
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Candal', sans-serif;
+}
+.pInv {
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Candal', sans-serif;
+}
+.leftInventory {
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Candal', sans-serif;
+}
+.rightInventory {
+  font-size: 35px;
+  text-align: center;
+  font-family: 'Candal', sans-serif;
 }
 /*.left {
   float: left;
