@@ -19,82 +19,20 @@ var currentPlayer
       icepick()
       hammer()
       currentPlayer.total +=5
-      // first
-      if (first.axe == true) {axeTrue()}
-      if (first.icepick == true) {icepickTrue()}
-      if (first.hammer == true) {hammerTrue()}
-      if (first.restart == true) {
-        game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
+      if (first.bonus){
+        currentPlayer.total += first.bonuspts
       }
-      if (first.health == true) {
-      healthKill(first)
-    console.log("im running")}
-      if (first.truth == true) {
-        game.slot1.on('click', function(){
-          box()
-          $('#myModal').modal()
-          game.nextPath1(first)
-          $('.ptwo').text(first.textPop)
-          $('.pone').html('<img src ="' + first.imagePop + '">')
-          switchPlayer()
-          getWinner()
-          console.log("first")
-          })
+      if (second.bonus){
+        currentPlayer.total += first.bonuspts
       }
-      game.slot1.attr('src', first.image)
-      game.context1.text(first.context)
-
-      // second
-      if (second.axe == true) {axeTrue()}
-      if (second.icepick == true) {icepickTrue()}
-      if (second.hammer == true) {hammerTrue()}
-      if (second.restart == true) {
-        game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
+      if (third.bonus){
+        currentPlayer.total += first.bonuspts
       }
-      if (second.health == true){
-      healthKill(second)
-      console.log("im running")
-    }
-      if (second.truth == true) {
-      game.slot2.on('click',function(){
-        box()
-        console.log("second")
-        $('#myModal').modal()
-        game.nextPath2(second)
-        $('.ptwo').text(second.textPop)
-        $('.pone').html('<img src ="' + second.imagePop + '">')
-        switchPlayer()
-        getWinner()
-
-      })
-      }
-      game.slot2.attr('src', second.image)
-      game.context2.text(second.context)
-      // third
-      if (third.axe == true) {axeTrue()}
-      if (third.icepick == true) {icepickTrue()}
-      if (third.hammer == true) {hammerTrue()}
-      if (third.restart == true) {game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)}
-      if (third.health == true){
-      healthKill(third)
-    console.log("im running")}
-      if (third.truth == true) {
-        box()
-        game.slot3.on('click',function(){
-        $('#myModal').modal()
-        game.nextPath3(third)
-        $('.ptwo').text(third.textPop)
-        $('.pone').html('<img src ="' + third.imagePop + '">')
-        switchPlayer()
-        getWinner()
-        console.log("third")
-      })
-      }
-      game.slot3.attr('src', third.image)
-      game.context3.text(third.context)
-
+      dryfix(first,1)
+      dryfix(second,2)
+      dryfix(third,3)
     },
-    // all the content of the game
+    // all the content of the game please minimize for easy access to js logic
     paths: {
       slot1: {
         // 1
@@ -108,7 +46,7 @@ var currentPlayer
           // 11
           truth: false,
           health: false,
-          context: "Use the axe you bought and axe your way through the door",
+          context: "Use the axe you got from the box (if axe is in inventory)",
           image: 'img/chopping.gif',
           textPop: "It worked! After a short while you were able to cut through the door. You entered a large hallway full of cells and noticed a man in one of them. Not too long after a guard walked into the hallway but he hadn't noticed you yet. What should you do?",
           imagePop: "img/soldier1.png",
@@ -118,14 +56,15 @@ var currentPlayer
             truth: true,
             health: false,
             image: 'img/fire axe.jpg',
-            textPop: "You slowly walked towards the man and chopped him in the head killing him. You took his gun and keys. After killing the soldier you freed the man in the cell and decided to work together to get out. You continued down the hallway and went out the a door that accidently let you to the middle of a dinning hall full of soldiers eating, you need to act fast.",
+            textPop: "You slowly walked towards the man and chopped him in the head killing him. You took his gun, armor and keys. After killing the soldier you freed the man in the cell and decided to work together to get out. You continued down the hallway and went out the a door that accidently let you to the middle of a dinning hall full of soldiers eating, you need to act fast.",
             imagePop:'img/chopping.gif',
             slot2: {
               // 1111
               context: "Flip a table to take cover behind",
               image: "img/covertable.gif",
               truth: true,
-              health: false,
+              health: true,
+              healthDMG: Math.floor(Math.random()* -51),
               textPop: "You flipped a table and took cover behind one as they began to fire at you. You need to act fast!",
               imagePop: "img/covertable.gif",
               slot1: {
@@ -136,11 +75,324 @@ var currentPlayer
                 truth: true,
                 health: false,
                 slot1: {
+                  context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                  image: 'img/forest.gif',
+                  textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                  imagePop: 'img/bloodhand.gif',
                   health: true,
-                  healthDMG: Math.floor(Math.random()*101)
+                  healthDMG: Math.floor(Math.random()*41),
+                  truth: true,
+                  slot1: {
+                    context: "Continue to run",
+                    image: "img/running.gif",
+                    textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                    image: "img/mine.gif",
+                    truth: true,
+                    health: true,
+                    healthDMG: Math.floor(Math.random()*121),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Hide in the forest till things blow over",
+                    image: "img/sneaking.gif",
+                    textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                    imagePop: "img/dog.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Turn around and fight",
+                    image: "img/forestshoot.gif",
+                    textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                    imagePop: "img/mine.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
                 },
-                slot2: {},
-                slot3: {}
+                slot2: {
+                  context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                  image: "img/sneaking.gif",
+                  textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                  imagePop: "img/blastedaway.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    health: true,
+                    healthDMG: 100,
+                  },
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                  image: "img/plane.jpg",
+                  textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                  imagePop: "img/bleeding.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Use the plane radio to radio out for help",
+                    image: "img/radio.gif",
+                    textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                    imagePop: "img/forestshoot.gif",
+                    truth: true,
+                    health: true,
+                    healthDMG: Math.floor(Math.random()*201),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Search the plane for any supplies",
+                    image: "img/insideplane.jpg",
+                    textPop: "You search inside the plane hoping to score on some supplies.",
+                    imagePop: "img/insideplane.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Grab the medikit and apply it on yourself",
+                      image: "img/medikit.png",
+                      textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Steal one of the military humvee's",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*101),
+                        slot1: {
+                          health: true,
+                          healthDMG: 100,
+                        },
+                        slo2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Surprise attack their camp",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                        image: "img/hidden.jpg",
+                        textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Grab the flare gun",
+                      image: "img/flare.jpg",
+                      textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Shoot the flare gun to start a fire near the camp",
+                        image: "img/fire.gif",
+                        textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                        imagePop: "img/fireout.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*101),
+                        slot1: {
+                          context: "Take the car and escape",
+                          image: "img/humvee.jpg",
+                          textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                          imagePop:"img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Kill them all",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Run away",
+                          image: "img/running.gif",
+                          textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Steal their military humvee",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Pull out your gun and attack",
+                        image: "img/forestshoot.gif",
+                        textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot3: {
+                      context: "Try to save the man",
+                      image: "img/bleeding.gif",
+                      textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                    }
+                  },
+                  slot3: {
+                    context: "Start to climb down the plane",
+                    image: "img/climb.gif",
+                    textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                    image: "img/planecrash.jpg",
+                    health: false,
+                    truth: true,
+                    slot1: {
+                      context: "Wait until it gets dark for them to sleep",
+                      image: "img/stealth.jpg",
+                      textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                      imagePop: "img/night.gif",
+                      health: true,
+                      truth: true,
+                      healthDMG: Math.floor(Math.random()*21),
+                      slot1: {
+                        context: "Kill all the soldiers in their sleep",
+                        image: "img/stealthkill.gif",
+                        textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                        imagePop: "img/tie.gif",
+                        health: false,
+                        truth: true,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Steal their military humvee",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1:{health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Sneak off into the night",
+                        image: "img/sneaking.gif",
+                        textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Pull out your gun and attack",
+                      image: "img/sneaking.gif",
+                      textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Steal a military humvee and attack",
+                      image: "img/humvee.jpg",
+                      textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  }
+                }
               },
               slot2: {
                 context: "Make a run for the door",
@@ -185,9 +437,326 @@ var currentPlayer
               imagePop: "img/airport.png",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: Math.floor(Math.random()*101)},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                image: 'img/forest.gif',
+                textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                imagePop: 'img/bloodhand.gif',
+                health: true,
+                healthDMG: Math.floor(Math.random()*101),
+                truth: true,
+                slot1: {
+                  context: "Continue to run",
+                  image: "img/running.gif",
+                  textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                  image: "img/mine.gif",
+                  truth: true,
+                  health: true,
+                  healthDMG: Math.floor(Math.random()*121),
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot2: {
+                  context: "Hide in the forest till things blow over",
+                  image: "img/sneaking.gif",
+                  textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                  imagePop: "img/dog.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "Turn around and fight",
+                  image: "img/forestshoot.gif",
+                  textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                  imagePop: "img/mine.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                }
+              },
+              slot2: {
+                context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                image: "img/sneaking.gif",
+                textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                imagePop: "img/blastedaway.gif",
+                truth: true,
+                health: false,
+                slot1: {
+                  health: true,
+                  healthDMG: 100,
+                },
+                slot2: {},
+                slot3: {}
+              },
+              slot3: {
+                context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                image: "img/plane.jpg",
+                textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                imagePop: "img/bleeding.gif",
+                truth: true,
+                health: false,
+                slot1: {
+                  context: "Use the plane radio to radio out for help",
+                  image: "img/radio.gif",
+                  textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                  imagePop: "img/forestshoot.gif",
+                  truth: true,
+                  health: true,
+                  healthDMG: Math.floor(Math.random()*201),
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot2: {
+                  context: "Search the plane for any supplies",
+                  image: "img/insideplane.jpg",
+                  textPop: "You search inside the plane hoping to score on some supplies.",
+                  imagePop: "img/insideplane.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Grab the medikit and apply it on yourself",
+                    image: "img/medikit.png",
+                    textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Steal one of the military humvee's",
+                      image: "img/humvee.jpg",
+                      textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: true,
+                      health: Math.floor(Math.random()*101),
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slo2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Surprise attack their camp",
+                      image: "img/forestshoot.gif",
+                      textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                      image: "img/hidden.jpg",
+                      textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                      imagePop: "img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Grab the flare gun",
+                    image: "img/flare.jpg",
+                    textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Shoot the flare gun to start a fire near the camp",
+                      image: "img/fire.gif",
+                      textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                      imagePop: "img/fireout.gif",
+                      truth: true,
+                      health: true,
+                      health: Math.floor(Math.random()*101),
+                      slot1: {
+                        context: "Take the car and escape",
+                        image: "img/humvee.jpg",
+                        textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                        imagePop:"img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Kill them all",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Run away",
+                        image: "img/running.gif",
+                        textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Steal their military humvee",
+                      image: "img/humvee.jpg",
+                      textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Pull out your gun and attack",
+                      image: "img/forestshoot.gif",
+                      textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot3: {
+                    context: "Try to save the man",
+                    image: "img/bleeding.gif",
+                    textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                      slot1: {
+                        context: "Steal one of the military humvee's",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*201),
+                        slot1: {
+                          health: true,
+                          healthDMG: 100,
+                        },
+                        slo2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Surprise attack their camp",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                        image: "img/hidden.jpg",
+                        textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                  }
+                },
+                slot3: {
+                  context: "Start to climb down the plane",
+                  image: "img/climb.gif",
+                  textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                  image: "img/planecrash.jpg",
+                  health: false,
+                  truth: true,
+                  slot1: {
+                    context: "Wait until it gets dark for them to sleep",
+                    image: "img/stealth.jpg",
+                    textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                    imagePop: "img/night.gif",
+                    health: true,
+                    truth: true,
+                    healthDMG: Math.floor(Math.random()*21),
+                    slot1: {
+                      context: "Kill all the soldiers in their sleep",
+                      image: "img/stealthkill.gif",
+                      textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                      imagePop: "img/tie.gif",
+                      health: false,
+                      truth: true,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Steal their military humvee",
+                      image: "img/humvee.jpg",
+                      textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1:{health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Sneak off into the night",
+                      image: "img/sneaking.gif",
+                      textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                      imagePop: "img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Pull out your gun and attack",
+                    image: "img/sneaking.gif",
+                    textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Steal a military humvee and attack",
+                    image: "img/humvee.jpg",
+                    textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+
+                }
+              },
             }
           },
           slot2: {
@@ -220,8 +789,8 @@ var currentPlayer
           // 12
           truth: false,
           health: false,
-          context: "Use the icepick you bought to try to picklock your way through the door",
-          image: "img/icepick.jpg",
+          context: "Use the icepick you got from the box (if icepick is in inventory)",
+          image: "img/picking.gif",
           textPop: "You start picking away at the door with the icepick because picklocking didn't work, the door finally budged open. Once it open you entered the door into a long hallway full of cells with one of them locked with a man inside. You continued down until shortly a soldier walked into the hallway, but hadn't noticed you. What should you do?",
           imagePop: "img/picking.gif",
           slot1: {
@@ -230,14 +799,15 @@ var currentPlayer
             truth: true,
             health: false,
             image: 'img/picking.gif',
-            textPop: "You snuck behind the guard and stuck the pickaxe into his head killing him. You grabbed his gun and keys and freed the man in the cell. Shortly after the both of you agreed that your best chance for survival was to work together. You continued down and entered a door that accidently led you into a dinning hall full of soldiers eating, they noticed you and quickly began to grab their weapons. You need to act fast!",
+            textPop: "You snuck behind the guard and stuck the pickaxe into his head killing him. You grabbed his gun, armor and keys and freed the man in the cell. Shortly after the both of you agreed that your best chance for survival was to work together. You continued down and entered a door that accidently led you into a dinning hall full of soldiers eating, they noticed you and quickly began to grab their weapons. You need to act fast!",
             imagePop: "img/soldiers.jpg",
             slot2: {
               // 1111
               context: "Flip a table to take cover behind",
               image: "img/covertable.gif",
               truth: true,
-              health: false,
+              health: true,
+              healthDMG:  Math.floor(Math.random()*-51),
               textPop: "You flipped a table and took cover behind one as they began to fire at you. You need to act fast!",
               imagePop: "img/covertable.gif",
               slot1: {
@@ -247,12 +817,327 @@ var currentPlayer
                 imagePop: "img/airport.png",
                 truth: true,
                 health: false,
+                // copy airfield w/ gun and man
                 slot1: {
+                  context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                  image: 'img/forest.gif',
+                  textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                  imagePop: 'img/bloodhand.gif',
                   health: true,
-                  healthDMG: Math.floor(Math.random()*101)
+                  healthDMG: Math.floor(Math.random()*101),
+                  truth: true,
+                  slot1: {
+                    context: "Continue to run",
+                    image: "img/running.gif",
+                    textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                    image: "img/mine.gif",
+                    truth: true,
+                    health: true,
+                    healthDMG: Math.floor(Math.random()*121),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Hide in the forest till things blow over",
+                    image: "img/sneaking.gif",
+                    textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                    imagePop: "img/dog.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Turn around and fight",
+                    image: "img/forestshoot.gif",
+                    textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                    imagePop: "img/mine.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
                 },
-                slot2: {},
-                slot3: {}
+                slot2: {
+                  context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                  image: "img/sneaking.gif",
+                  textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                  imagePop: "img/blastedaway.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    health: true,
+                    healthDMG: 100,
+                  },
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                  image: "img/plane.jpg",
+                  textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                  imagePop: "img/bleeding.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Use the plane radio to radio out for help",
+                    image: "img/radio.gif",
+                    textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                    imagePop: "img/forestshoot.gif",
+                    truth: true,
+                    health: true,
+                    healthDMG: Math.floor(Math.random()*201),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Search the plane for any supplies",
+                    image: "img/insideplane.jpg",
+                    textPop: "You search inside the plane hoping to score on some supplies.",
+                    imagePop: "img/insideplane.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Grab the medikit and apply it on yourself",
+                      image: "img/medikit.png",
+                      textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Steal one of the military humvee's",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*101),
+                        slot1: {
+                          health: true,
+                          healthDMG: 100,
+                        },
+                        slo2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Surprise attack their camp",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                        image: "img/hidden.jpg",
+                        textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Grab the flare gun",
+                      image: "img/flare.jpg",
+                      textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Shoot the flare gun to start a fire near the camp",
+                        image: "img/fire.gif",
+                        textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                        imagePop: "img/fireout.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*101),
+                        slot1: {
+                          context: "Take the car and escape",
+                          image: "img/humvee.jpg",
+                          textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                          imagePop:"img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Kill them all",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Run away",
+                          image: "img/running.gif",
+                          textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Steal their military humvee",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Pull out your gun and attack",
+                        image: "img/forestshoot.gif",
+                        textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot3: {
+                      context: "Try to save the man",
+                      image: "img/bleeding.gif",
+                      textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                      imagePop: "img/planecrash.jpg",
+                      truth: true,
+                      health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                    }
+                  },
+                  slot3: {
+                    context: "Start to climb down the plane",
+                    image: "img/climb.gif",
+                    textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                    image: "img/planecrash.jpg",
+                    health: false,
+                    truth: true,
+                    slot1: {
+                      context: "Wait until it gets dark for them to sleep",
+                      image: "img/stealth.jpg",
+                      textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                      imagePop: "img/night.gif",
+                      health: true,
+                      truth: true,
+                      healthDMG: Math.floor(Math.random()*21),
+                      slot1: {
+                        context: "Kill all the soldiers in their sleep",
+                        image: "img/stealthkill.gif",
+                        textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                        imagePop: "img/tie.gif",
+                        health: false,
+                        truth: true,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Steal their military humvee",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1:{health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Sneak off into the night",
+                        image: "img/sneaking.gif",
+                        textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Pull out your gun and attack",
+                      image: "img/sneaking.gif",
+                      textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Steal a military humvee and attack",
+                      image: "img/humvee.jpg",
+                      textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  }
+                }
+                // end of copy
               },
               slot2: {
                 context: "Make a run for the door",
@@ -297,9 +1182,325 @@ var currentPlayer
               imagePop: "img/airport.png",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: Math.floor(Math.random()*101)},
-              slot2: {},
-              slot3: {}
+              slot1: {
+                context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                image: 'img/forest.gif',
+                textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                imagePop: 'img/bloodhand.gif',
+                health: true,
+                healthDMG: Math.floor(Math.random()*101),
+                truth: true,
+                slot1: {
+                  context: "Continue to run",
+                  image: "img/running.gif",
+                  textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                  image: "img/mine.gif",
+                  truth: true,
+                  health: true,
+                  healthDMG: Math.floor(Math.random()*121),
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot2: {
+                  context: "Hide in the forest till things blow over",
+                  image: "img/sneaking.gif",
+                  textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                  imagePop: "img/dog.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "Turn around and fight",
+                  image: "img/forestshoot.gif",
+                  textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                  imagePop: "img/mine.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                }
+              },
+              slot2: {
+                context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                image: "img/sneaking.gif",
+                textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                imagePop: "img/blastedaway.gif",
+                truth: true,
+                health: false,
+                slot1: {
+                  health: true,
+                  healthDMG: 100,
+                },
+                slot2: {},
+                slot3: {}
+              },
+              slot3: {
+                context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                image: "img/plane.jpg",
+                textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                imagePop: "img/bleeding.gif",
+                truth: true,
+                health: false,
+                slot1: {
+                  context: "Use the plane radio to radio out for help",
+                  image: "img/radio.gif",
+                  textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                  imagePop: "img/forestshoot.gif",
+                  truth: true,
+                  health: true,
+                  healthDMG: Math.floor(Math.random()*201),
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot2: {
+                  context: "Search the plane for any supplies",
+                  image: "img/insideplane.jpg",
+                  textPop: "You search inside the plane hoping to score on some supplies.",
+                  imagePop: "img/insideplane.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Grab the medikit and apply it on yourself",
+                    image: "img/medikit.png",
+                    textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Steal one of the military humvee's",
+                      image: "img/humvee.jpg",
+                      textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: true,
+                      health: Math.floor(Math.random()*101),
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slo2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Surprise attack their camp",
+                      image: "img/forestshoot.gif",
+                      textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                      image: "img/hidden.jpg",
+                      textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                      imagePop: "img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Grab the flare gun",
+                    image: "img/flare.jpg",
+                    textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Shoot the flare gun to start a fire near the camp",
+                      image: "img/fire.gif",
+                      textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                      imagePop: "img/fireout.gif",
+                      truth: true,
+                      health: true,
+                      health: Math.floor(Math.random()*101),
+                      slot1: {
+                        context: "Take the car and escape",
+                        image: "img/humvee.jpg",
+                        textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                        imagePop:"img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Kill them all",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Run away",
+                        image: "img/running.gif",
+                        textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "Steal their military humvee",
+                      image: "img/humvee.jpg",
+                      textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Pull out your gun and attack",
+                      image: "img/forestshoot.gif",
+                      textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot3: {
+                    context: "Try to save the man",
+                    image: "img/bleeding.gif",
+                    textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                    imagePop: "img/planecrash.jpg",
+                    truth: true,
+                    health: false,
+                      slot1: {
+                        context: "Steal one of the military humvee's",
+                        image: "img/humvee.jpg",
+                        textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: true,
+                        health: Math.floor(Math.random()*201),
+                        slot1: {
+                          health: true,
+                          healthDMG: 100,
+                        },
+                        slo2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Surprise attack their camp",
+                        image: "img/forestshoot.gif",
+                        textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                        image: "img/hidden.jpg",
+                        textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                        imagePop: "img/tie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                  }
+                },
+                slot3: {
+                  context: "Start to climb down the plane",
+                  image: "img/climb.gif",
+                  textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                  image: "img/planecrash.jpg",
+                  health: false,
+                  truth: true,
+                  slot1: {
+                    context: "Wait until it gets dark for them to sleep",
+                    image: "img/stealth.jpg",
+                    textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                    imagePop: "img/night.gif",
+                    health: true,
+                    truth: true,
+                    healthDMG: Math.floor(Math.random()*21),
+                    slot1: {
+                      context: "Kill all the soldiers in their sleep",
+                      image: "img/stealthkill.gif",
+                      textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                      imagePop: "img/tie.gif",
+                      health: false,
+                      truth: true,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Steal their military humvee",
+                      image: "img/humvee.jpg",
+                      textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1:{health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Sneak off into the night",
+                      image: "img/sneaking.gif",
+                      textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                      imagePop: "img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Pull out your gun and attack",
+                    image: "img/sneaking.gif",
+                    textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Steal a military humvee and attack",
+                    image: "img/humvee.jpg",
+                    textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                }
+              }
             }
 
           },
@@ -392,14 +1593,329 @@ var currentPlayer
                     imagePop: "img/airport.png",
                     truth: true,
                     health: false,
+                    // copy for airfield w/o man w/ gun
                     slot1: {
+                      context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                      image: 'img/forest.gif',
+                      textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+                      imagePop: 'img/bloodhand.gif',
                       health: true,
-                      healthDMG: Math.floor(Math.random()*51),
+                      healthDMG: Math.floor(Math.random()*41),
+                      truth: true,
+                      slot1: {
+                        context: "Continue to run",
+                        image: "img/running.gif",
+                        textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                        image: "img/mine.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*121),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Hide in the forest till things blow over",
+                        image: "img/sneaking.gif",
+                        textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                        imagePop: "img/dog.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Turn around and fight",
+                        image: "img/forestshoot.gif",
+                        textPop: "You turn around and decide to fight them. You use the terrain as a mean's of defense and are able to hold them off for a long time. They got tired of sending men in to die so they decided to artilery strike you. You died.",
+                        imagePop: "img/mine.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
                     },
                     slot2: {
-
+                      context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                      image: "img/sneaking.gif",
+                      textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+                      imagePop: "img/blastedaway.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slot2: {},
+                      slot3: {}
                     },
-                    slot3: {}
+                    slot3: {
+                      context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+                      image: "img/plane.jpg",
+                      textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+                      imagePop: "img/bleeding.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Use the plane radio to radio out for help",
+                        image: "img/radio.gif",
+                        textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*201),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Search the plane for any supplies",
+                        image: "img/insideplane.jpg",
+                        textPop: "You search inside the plane hoping to score on some supplies.",
+                        imagePop: "img/insideplane.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Grab the medikit and apply it on yourself",
+                          image: "img/medikit.png",
+                          textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Pull out your gun and attack",
+                            image: "img/forestshoot.gif",
+                            textPop: "You gave them quite a scare and killed a lot with that surprise move, but there was too many of them for you. You died",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()* -101),
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Grab the flare gun",
+                          image: "img/flare.jpg",
+                          textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Shoot the flare gun to start a fire near the camp",
+                            image: "img/fire.gif",
+                            textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                            imagePop: "img/fireout.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              context: "Take the car and escape",
+                              image: "img/humvee.jpg",
+                              textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                              imagePop:"img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Pull out your gun and kill them all",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Run away",
+                              image: "img/running.gif",
+                              textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Attack them",
+                            image: "img/sneaking.gif",
+                            textPop: "You pulled out your and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                            imagePop: "img/forestshoot.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot3: {
+                          context: "You noticed a locked box in the back of the plane",
+                          image: "img/lockedbox.jpg",
+                          textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        }
+                      },
+                      slot3: {
+                        context: "Start to climb down the plane",
+                        image: "img/climb.gif",
+                        textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                        image: "img/planecrash.jpg",
+                        health: false,
+                        truth: true,
+                        slot1: {
+                          context: "Wait until it gets dark for them to sleep",
+                          image: "img/stealth.jpg",
+                          textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                          imagePop: "img/night.gif",
+                          health: true,
+                          truth: true,
+                          healthDMG: Math.floor(Math.random()*21),
+                          slot1: {
+                            context: "Kill all the soldiers in their sleep",
+                            image: "img/stealthkill.gif",
+                            textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                            imagePop: "img/tie.gif",
+                            health: false,
+                            truth: true,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1:{health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Sneak off into the night",
+                            image: "img/sneaking.gif",
+                            textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Attack them",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started attack. You put up a good fight but they outnumbered you. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Steal a military humvee and attack",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+
+                      }
+                    }
+                      // end copy
                   },
                   slot2: {
                     context: "Pull out your gun and start shooting at the soldiers while you have the element of surprise.",
@@ -409,11 +1925,324 @@ var currentPlayer
                     truth: true,
                     health: false,
                     slot1: {
+                      context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                      image: 'img/forest.gif',
+                      textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                      imagePop: 'img/bloodhand.gif',
                       health: true,
-                      healthDMG: Math.floor(Math.random()*31),
+                      healthDMG: Math.floor(Math.random()*101),
+                      truth: true,
+                      slot1: {
+                        context: "Continue to run",
+                        image: "img/running.gif",
+                        textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                        image: "img/mine.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*121),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Hide in the forest till things blow over",
+                        image: "img/sneaking.gif",
+                        textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                        imagePop: "img/dog.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Turn around and fight",
+                        image: "img/forestshoot.gif",
+                        textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                        imagePop: "img/mine.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
                     },
-                    slot2: {},
-                    slot3: {}
+                    slot2: {
+                      context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                      image: "img/sneaking.gif",
+                      textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                      imagePop: "img/blastedaway.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                      image: "img/plane.jpg",
+                      textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                      imagePop: "img/bleeding.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Use the plane radio to radio out for help",
+                        image: "img/radio.gif",
+                        textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*201),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Search the plane for any supplies",
+                        image: "img/insideplane.jpg",
+                        textPop: "You search inside the plane hoping to score on some supplies.",
+                        imagePop: "img/insideplane.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Grab the medikit and apply it on yourself",
+                          image: "img/medikit.png",
+                          textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Grab the flare gun",
+                          image: "img/flare.jpg",
+                          textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Shoot the flare gun to start a fire near the camp",
+                            image: "img/fire.gif",
+                            textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                            imagePop: "img/fireout.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              context: "Take the car and escape",
+                              image: "img/humvee.jpg",
+                              textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                              imagePop:"img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Kill them all",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Run away",
+                              image: "img/running.gif",
+                              textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Pull out your gun and attack",
+                            image: "img/forestshoot.gif",
+                            textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                            imagePop: "img/forestshoot.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot3: {
+                          context: "Try to save the man",
+                          image: "img/bleeding.gif",
+                          textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                            slot1: {
+                              context: "Steal one of the military humvee's",
+                              image: "img/humvee.jpg",
+                              textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: true,
+                              health: Math.floor(Math.random()*201),
+                              slot1: {
+                                health: true,
+                                healthDMG: 100,
+                              },
+                              slo2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Surprise attack their camp",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                              image: "img/hidden.jpg",
+                              textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                              imagePop: "img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                        }
+                      },
+                      slot3: {
+                        context: "Start to climb down the plane",
+                        image: "img/climb.gif",
+                        textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                        image: "img/planecrash.jpg",
+                        health: false,
+                        truth: true,
+                        slot1: {
+                          context: "Wait until it gets dark for them to sleep",
+                          image: "img/stealth.jpg",
+                          textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                          imagePop: "img/night.gif",
+                          health: true,
+                          truth: true,
+                          healthDMG: Math.floor(Math.random()*21),
+                          slot1: {
+                            context: "Kill all the soldiers in their sleep",
+                            image: "img/stealthkill.gif",
+                            textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                            imagePop: "img/tie.gif",
+                            health: false,
+                            truth: true,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1:{health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Sneak off into the night",
+                            image: "img/sneaking.gif",
+                            textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Pull out your gun and attack",
+                          image: "img/sneaking.gif",
+                          textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Steal a military humvee and attack",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      }
+                    }
                   },
                   slot3: {
                     context: "Convince the man to take the charge while you run away.",
@@ -422,9 +2251,327 @@ var currentPlayer
                     imagePop: "img/airport.png",
                     truth: true,
                     health: false,
-                    slot1: {},
-                    slot2: {},
-                    slot3: {}
+                    slot1: {
+                      context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                      image: 'img/forest.gif',
+                      textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+                      imagePop: 'img/bloodhand.gif',
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*41),
+                      truth: true,
+                      slot1: {
+                        context: "Continue to run",
+                        image: "img/running.gif",
+                        textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                        image: "img/mine.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*121),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Hide in the forest till things blow over",
+                        image: "img/sneaking.gif",
+                        textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                        imagePop: "img/dog.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Turn around and fight",
+                        image: "img/forestshoot.gif",
+                        textPop: "You turn around and decide to fight them. You use the terrain as a mean's of defense and are able to hold them off for a long time. They got tired of sending men in to die so they decided to artilery strike you. You died.",
+                        imagePop: "img/mine.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                      image: "img/sneaking.gif",
+                      textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+                      imagePop: "img/blastedaway.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+                      image: "img/plane.jpg",
+                      textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+                      imagePop: "img/bleeding.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Use the plane radio to radio out for help",
+                        image: "img/radio.gif",
+                        textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*201),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Search the plane for any supplies",
+                        image: "img/insideplane.jpg",
+                        textPop: "You search inside the plane hoping to score on some supplies.",
+                        imagePop: "img/insideplane.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Grab the medikit and apply it on yourself",
+                          image: "img/medikit.png",
+                          textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Pull out your gun and attack",
+                            image: "img/forestshoot.gif",
+                            textPop: "You gave them quite a scare and killed a lot with that surprise move, but there was too many of them for you. You died",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()* -101),
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Grab the flare gun",
+                          image: "img/flare.jpg",
+                          textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Shoot the flare gun to start a fire near the camp",
+                            image: "img/fire.gif",
+                            textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                            imagePop: "img/fireout.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              context: "Take the car and escape",
+                              image: "img/humvee.jpg",
+                              textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                              imagePop:"img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Pull out your gun and kill them all",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Run away",
+                              image: "img/running.gif",
+                              textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Attack them",
+                            image: "img/sneaking.gif",
+                            textPop: "You pulled out your and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                            imagePop: "img/forestshoot.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot3: {
+                          context: "You noticed a locked box in the back of the plane",
+                          image: "img/lockedbox.jpg",
+                          textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        }
+                      },
+                      slot3: {
+                        context: "Start to climb down the plane",
+                        image: "img/climb.gif",
+                        textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                        image: "img/planecrash.jpg",
+                        health: false,
+                        truth: true,
+                        slot1: {
+                          context: "Wait until it gets dark for them to sleep",
+                          image: "img/stealth.jpg",
+                          textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                          imagePop: "img/night.gif",
+                          health: true,
+                          truth: true,
+                          healthDMG: Math.floor(Math.random()*21),
+                          slot1: {
+                            context: "Kill all the soldiers in their sleep",
+                            image: "img/stealthkill.gif",
+                            textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                            imagePop: "img/tie.gif",
+                            health: false,
+                            truth: true,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1:{health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Sneak off into the night",
+                            image: "img/sneaking.gif",
+                            textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Attack them",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started attack. You put up a good fight but they outnumbered you. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Steal a military humvee and attack",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+
+                      }
+                    }
                   }
                 },
                 slot2: {
@@ -447,12 +2594,323 @@ var currentPlayer
                   textPop: "You pull out your gun and start firing away. You were able to pick off most of them, but a few were able to grab their gun and fire back. Luckily the man charged them as well, but he got badly hurt. After we cleared the soldiers, we walked outside to realize that we were at an airport. I had to come up with a plan quick before others realized what had happened.",
                   imagePop: "img/airport.png",
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
                     healthDMG: Math.floor(Math.random()*41),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                      imagePop: "img/mine.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
                   slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
                   },
                   slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Pull out your gun and attack",
+                          image: "img/forestshoot.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "Try to save the man",
+                        image: "img/bleeding.gif",
+                        textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Pull out your gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    }
                   }
                 }
               },
@@ -488,9 +2946,327 @@ var currentPlayer
                     imagePop: "img/airport.png",
                     truth: true,
                     health: false,
-                    slot1: {},
-                    slot2: {},
-                    slot3: {}
+                    slot1: {
+                      context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                      image: 'img/forest.gif',
+                      textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+                      imagePop: 'img/bloodhand.gif',
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*41),
+                      truth: true,
+                      slot1: {
+                        context: "Continue to run",
+                        image: "img/running.gif",
+                        textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                        image: "img/mine.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*121),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Hide in the forest till things blow over",
+                        image: "img/sneaking.gif",
+                        textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                        imagePop: "img/dog.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Turn around and fight",
+                        image: "img/forestshoot.gif",
+                        textPop: "You turn around and decide to fight them. You use the terrain as a mean's of defense and are able to hold them off for a long time. They got tired of sending men in to die so they decided to artilery strike you. You died.",
+                        imagePop: "img/mine.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    },
+                    slot2: {
+                      context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                      image: "img/sneaking.gif",
+                      textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+                      imagePop: "img/blastedaway.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+                      image: "img/plane.jpg",
+                      textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+                      imagePop: "img/bleeding.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Use the plane radio to radio out for help",
+                        image: "img/radio.gif",
+                        textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*201),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Search the plane for any supplies",
+                        image: "img/insideplane.jpg",
+                        textPop: "You search inside the plane hoping to score on some supplies.",
+                        imagePop: "img/insideplane.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Grab the medikit and apply it on yourself",
+                          image: "img/medikit.png",
+                          textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Pull out your gun and attack",
+                            image: "img/forestshoot.gif",
+                            textPop: "You gave them quite a scare and killed a lot with that surprise move, but there was too many of them for you. You died",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()* -101),
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Grab the flare gun",
+                          image: "img/flare.jpg",
+                          textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Shoot the flare gun to start a fire near the camp",
+                            image: "img/fire.gif",
+                            textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                            imagePop: "img/fireout.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              context: "Take the car and escape",
+                              image: "img/humvee.jpg",
+                              textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                              imagePop:"img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Pull out your gun and kill them all",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Run away",
+                              image: "img/running.gif",
+                              textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Attack them",
+                            image: "img/sneaking.gif",
+                            textPop: "You pulled out your and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                            imagePop: "img/forestshoot.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot3: {
+                          context: "You noticed a locked box in the back of the plane",
+                          image: "img/lockedbox.jpg",
+                          textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        }
+                      },
+                      slot3: {
+                        context: "Start to climb down the plane",
+                        image: "img/climb.gif",
+                        textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                        image: "img/planecrash.jpg",
+                        health: false,
+                        truth: true,
+                        slot1: {
+                          context: "Wait until it gets dark for them to sleep",
+                          image: "img/stealth.jpg",
+                          textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                          imagePop: "img/night.gif",
+                          health: true,
+                          truth: true,
+                          healthDMG: Math.floor(Math.random()*21),
+                          slot1: {
+                            context: "Kill all the soldiers in their sleep",
+                            image: "img/stealthkill.gif",
+                            textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                            imagePop: "img/tie.gif",
+                            health: false,
+                            truth: true,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1:{health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Sneak off into the night",
+                            image: "img/sneaking.gif",
+                            textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Attack them",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started attack. You put up a good fight but they outnumbered you. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Steal a military humvee and attack",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+
+                      }
+                    }
                   },
                   slot3: {
                     context: "I should surrender myself and figure out what the hell's going on",
@@ -674,7 +3450,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {},
+                          slot1: {health: true, healthDMG: 100},
                           slot2: {},
                           slot3: {}
                         },
@@ -770,11 +3546,42 @@ var currentPlayer
                         truth: true,
                         health: false,
                         slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
                           health: true,
-                          healthDMG:  Math.floor(Math.random()*201),
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
                         },
-                        slot2: {},
-                        slot3: {}
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
                       }
                     },
                     slot3: {
@@ -817,7 +3624,7 @@ var currentPlayer
                         slot3: {
                           context: "Sneak off into the night",
                           image: "img/sneaking.gif",
-                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
                           imagePop: "img/tie.gif",
                           truth: true,
                           health: false,
@@ -944,11 +3751,326 @@ var currentPlayer
                   truth: true,
                   health: false,
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
                     healthDMG: Math.floor(Math.random()*51),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "You turn around and decide to fight them. With no weapon at hand you literally charged back at the sniper and got blown away like an idiot.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
-                  slot2: {},
-                  slot3: {}
+                  slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Try to steal a gun and kill them while they are busy",
+                          image: "img/sneaking.gif",
+                          textPop: "You stole a gun, but they heard caught you in the act and killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()* -101),
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Grab a gun and kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You grabbed a gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Try to steal weapons and attack them with it",
+                          image: "img/sneaking.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "You noticed a locked box in the back of the plane",
+                        image: "img/lockedbox.jpg",
+                        textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Steal a gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+
+                    }
+                  }
                 },
                 slot2: {
                   context: "Have the man shoot them as you guys have the element of surprise",
@@ -958,11 +4080,324 @@ var currentPlayer
                   truth: true,
                   health: false,
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
                     healthDMG: Math.floor(Math.random()*41),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                      imagePop: "img/mine.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
-                  slot2: {},
-                  slot3: {}
+                  slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Pull out your gun and attack",
+                          image: "img/forestshoot.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "Try to save the man",
+                        image: "img/bleeding.gif",
+                        textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Pull out your gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    }
+                  }
                 },
                 slot3: {
                   context: "Charge them as the man gave you cover fire",
@@ -1098,9 +4533,328 @@ var currentPlayer
             imagePop: "img/airport.png",
             truth: false,
             health: false,
-            slot1: {},
-            slot2: {},
-            slot3: {}
+            slot1: {
+              context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+              image: 'img/forest.gif',
+              textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+              imagePop: 'img/bloodhand.gif',
+              bonus: true,
+              bonuspts: 50,
+              health: false,
+              truth: true,
+              slot1: {
+                context: "Continue to run",
+                image: "img/running.gif",
+                textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                image: "img/mine.gif",
+                truth: true,
+                health: true,
+                healthDMG: Math.floor(Math.random()*121),
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot2: {
+                context: "Hide in the forest till things blow over",
+                image: "img/sneaking.gif",
+                textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                imagePop: "img/dog.gif",
+                truth: true,
+                health: false,
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot3: {
+                context: "Turn around and fight",
+                image: "img/forestshoot.gif",
+                textPop: "You turn around and decide to fight them. With no weapon at hand you literally charged back at the sniper and got blown away like an idiot.",
+                imagePop: "img/gunfightdie.gif",
+                truth: true,
+                health: false,
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              }
+            },
+            slot2: {
+              context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+              image: "img/sneaking.gif",
+              textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+              imagePop: "img/blastedaway.gif",
+              truth: true,
+              health: false,
+              slot1: {
+                health: true,
+                healthDMG: 100,
+              },
+              slot2: {},
+              slot3: {}
+            },
+            slot3: {
+              context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+              image: "img/plane.jpg",
+              textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+              imagePop: "img/bleeding.gif",
+              truth: true,
+              health: false,
+              slot1: {
+                context: "Use the plane radio to radio out for help",
+                image: "img/radio.gif",
+                textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                imagePop: "img/forestshoot.gif",
+                truth: true,
+                health: true,
+                healthDMG: Math.floor(Math.random()*201),
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot2: {
+                context: "Search the plane for any supplies",
+                image: "img/insideplane.jpg",
+                textPop: "You search inside the plane hoping to score on some supplies.",
+                imagePop: "img/insideplane.jpg",
+                truth: true,
+                health: false,
+                slot1: {
+                  context: "Grab the medikit and apply it on yourself",
+                  image: "img/medikit.png",
+                  textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Steal one of the military humvee's",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*101),
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slo2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Try to steal a gun and kill them while they are busy",
+                    image: "img/sneaking.gif",
+                    textPop: "You stole a gun, but they heard caught you in the act and killed you.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()* -101),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                    image: "img/hidden.jpg",
+                    textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot2: {
+                  context: "Grab the flare gun",
+                  image: "img/flare.jpg",
+                  textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Shoot the flare gun to start a fire near the camp",
+                    image: "img/fire.gif",
+                    textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                    imagePop: "img/fireout.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*101),
+                    slot1: {
+                      context: "Take the car and escape",
+                      image: "img/humvee.jpg",
+                      textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                      imagePop:"img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Grab a gun and kill them all",
+                      image: "img/forestshoot.gif",
+                      textPop: "You grabbed a gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Run away",
+                      image: "img/running.gif",
+                      textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Steal their military humvee",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Try to steal weapons and attack them with it",
+                    image: "img/sneaking.gif",
+                    textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                    imagePop: "img/forestshoot.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot3: {
+                  context: "You noticed a locked box in the back of the plane",
+                  image: "img/lockedbox.jpg",
+                  textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Steal one of the military humvee's",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*201),
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slo2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Surprise attack their camp",
+                    image: "img/forestshoot.gif",
+                    textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                    image: "img/hidden.jpg",
+                    textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                }
+              },
+              slot3: {
+                context: "Start to climb down the plane",
+                image: "img/climb.gif",
+                textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                image: "img/planecrash.jpg",
+                health: false,
+                truth: true,
+                slot1: {
+                  context: "Wait until it gets dark for them to sleep",
+                  image: "img/stealth.jpg",
+                  textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                  imagePop: "img/night.gif",
+                  health: true,
+                  truth: true,
+                  healthDMG: Math.floor(Math.random()*21),
+                  slot1: {
+                    context: "Kill all the soldiers in their sleep",
+                    image: "img/stealthkill.gif",
+                    textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                    imagePop: "img/tie.gif",
+                    health: false,
+                    truth: true,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Steal their military humvee",
+                    image: "img/humvee.jpg",
+                    textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1:{health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Sneak off into the night",
+                    image: "img/sneaking.gif",
+                    textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot2: {
+                  context: "Steal a gun and attack",
+                  image: "img/sneaking.gif",
+                  textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                  imagePop: "img/gunfightdie.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "Steal a military humvee and attack",
+                  image: "img/humvee.jpg",
+                  textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                  imagePop: "img/gunfightdie.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                }
+
+              }
+            }
           },
           slot2: {
             image: "img/punch.gif",
@@ -1145,9 +4899,328 @@ var currentPlayer
             healthDMG: Math.floor(Math.random()*21),
             truth: false,
             health: true,
-            slot1: {},
-            slot2: {},
-            slot3: {}
+            slot1: {
+              context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+              image: 'img/forest.gif',
+              textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+              imagePop: 'img/bloodhand.gif',
+              bonus: true,
+              bonuspts: 50,
+              health: true,
+              truth: true,
+              slot1: {
+                context: "Continue to run",
+                image: "img/running.gif",
+                textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                image: "img/mine.gif",
+                truth: true,
+                health: true,
+                healthDMG: Math.floor(Math.random()*121),
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot2: {
+                context: "Hide in the forest till things blow over",
+                image: "img/sneaking.gif",
+                textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                imagePop: "img/dog.gif",
+                truth: true,
+                health: false,
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot3: {
+                context: "Turn around and fight",
+                image: "img/forestshoot.gif",
+                textPop: "You turn around and decide to fight them. With no weapon at hand you literally charged back at the sniper and got blown away like an idiot.",
+                imagePop: "img/gunfightdie.gif",
+                truth: true,
+                health: false,
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              }
+            },
+            slot2: {
+              context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+              image: "img/sneaking.gif",
+              textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+              imagePop: "img/blastedaway.gif",
+              truth: true,
+              health: false,
+              slot1: {
+                health: true,
+                healthDMG: 100,
+              },
+              slot2: {},
+              slot3: {}
+            },
+            slot3: {
+              context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+              image: "img/plane.jpg",
+              textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+              imagePop: "img/bleeding.gif",
+              truth: true,
+              health: false,
+              slot1: {
+                context: "Use the plane radio to radio out for help",
+                image: "img/radio.gif",
+                textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                imagePop: "img/forestshoot.gif",
+                truth: true,
+                health: true,
+                healthDMG: Math.floor(Math.random()*201),
+                slot1: {health: true, healthDMG: 100},
+                slot2: {},
+                slot3: {}
+              },
+              slot2: {
+                context: "Search the plane for any supplies",
+                image: "img/insideplane.jpg",
+                textPop: "You search inside the plane hoping to score on some supplies.",
+                imagePop: "img/insideplane.jpg",
+                truth: true,
+                health: false,
+                slot1: {
+                  context: "Grab the medikit and apply it on yourself",
+                  image: "img/medikit.png",
+                  textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Steal one of the military humvee's",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*101),
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slo2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Try to steal a gun and kill them while they are busy",
+                    image: "img/sneaking.gif",
+                    textPop: "You stole a gun, but they heard caught you in the act and killed you.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()* -101),
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                    image: "img/hidden.jpg",
+                    textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot2: {
+                  context: "Grab the flare gun",
+                  image: "img/flare.jpg",
+                  textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Shoot the flare gun to start a fire near the camp",
+                    image: "img/fire.gif",
+                    textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                    imagePop: "img/fireout.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*101),
+                    slot1: {
+                      context: "Take the car and escape",
+                      image: "img/humvee.jpg",
+                      textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                      imagePop:"img/tie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Grab a gun and kill them all",
+                      image: "img/forestshoot.gif",
+                      textPop: "You grabbed a gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Run away",
+                      image: "img/running.gif",
+                      textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
+                  },
+                  slot2: {
+                    context: "Steal their military humvee",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Try to steal weapons and attack them with it",
+                    image: "img/sneaking.gif",
+                    textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                    imagePop: "img/forestshoot.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot3: {
+                  context: "You noticed a locked box in the back of the plane",
+                  image: "img/lockedbox.jpg",
+                  textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                  imagePop: "img/planecrash.jpg",
+                  truth: true,
+                  health: false,
+                  slot1: {
+                    context: "Steal one of the military humvee's",
+                    image: "img/humvee.jpg",
+                    textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: true,
+                    health: Math.floor(Math.random()*201),
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slo2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Surprise attack their camp",
+                    image: "img/forestshoot.gif",
+                    textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                    image: "img/hidden.jpg",
+                    textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                }
+              },
+              slot3: {
+                context: "Start to climb down the plane",
+                image: "img/climb.gif",
+                textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                image: "img/planecrash.jpg",
+                health: false,
+                truth: true,
+                slot1: {
+                  context: "Wait until it gets dark for them to sleep",
+                  image: "img/stealth.jpg",
+                  textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                  imagePop: "img/night.gif",
+                  health: true,
+                  truth: true,
+                  healthDMG: Math.floor(Math.random()*21),
+                  slot1: {
+                    context: "Kill all the soldiers in their sleep",
+                    image: "img/stealthkill.gif",
+                    textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                    imagePop: "img/tie.gif",
+                    health: false,
+                    truth: true,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot2: {
+                    context: "Steal their military humvee",
+                    image: "img/humvee.jpg",
+                    textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                    imagePop: "img/gunfightdie.gif",
+                    truth: true,
+                    health: false,
+                    slot1:{health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "Sneak off into the night",
+                    image: "img/sneaking.gif",
+                    textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                    imagePop: "img/tie.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {health: true, healthDMG: 100},
+                    slot2: {},
+                    slot3: {}
+                  }
+                },
+                slot2: {
+                  context: "Steal a gun and attack",
+                  image: "img/sneaking.gif",
+                  textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                  imagePop: "img/gunfightdie.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                },
+                slot3: {
+                  context: "Steal a military humvee and attack",
+                  image: "img/humvee.jpg",
+                  textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                  imagePop: "img/gunfightdie.gif",
+                  truth: true,
+                  health: false,
+                  slot1: {health: true, healthDMG: 100},
+                  slot2: {},
+                  slot3: {}
+                }
+
+              }
+            }
           },
           slot2: {
             // 322
@@ -1260,11 +5333,324 @@ var currentPlayer
                     truth: true,
                     health: false,
                     slot1: {
+                      context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                      image: 'img/forest.gif',
+                      textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                      imagePop: 'img/bloodhand.gif',
                       health: true,
                       healthDMG: Math.floor(Math.random()*31),
+                      truth: true,
+                      slot1: {
+                        context: "Continue to run",
+                        image: "img/running.gif",
+                        textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                        image: "img/mine.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*121),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Hide in the forest till things blow over",
+                        image: "img/sneaking.gif",
+                        textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                        imagePop: "img/dog.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Turn around and fight",
+                        image: "img/forestshoot.gif",
+                        textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                        imagePop: "img/mine.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
                     },
-                    slot2: {},
-                    slot3: {}
+                    slot2: {
+                      context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                      image: "img/sneaking.gif",
+                      textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                      imagePop: "img/blastedaway.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        health: true,
+                        healthDMG: 100,
+                      },
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                      image: "img/plane.jpg",
+                      textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                      imagePop: "img/bleeding.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Use the plane radio to radio out for help",
+                        image: "img/radio.gif",
+                        textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                        imagePop: "img/forestshoot.gif",
+                        truth: true,
+                        health: true,
+                        healthDMG: Math.floor(Math.random()*201),
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot2: {
+                        context: "Search the plane for any supplies",
+                        image: "img/insideplane.jpg",
+                        textPop: "You search inside the plane hoping to score on some supplies.",
+                        imagePop: "img/insideplane.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Grab the medikit and apply it on yourself",
+                          image: "img/medikit.png",
+                          textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Grab the flare gun",
+                          image: "img/flare.jpg",
+                          textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                          slot1: {
+                            context: "Shoot the flare gun to start a fire near the camp",
+                            image: "img/fire.gif",
+                            textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                            imagePop: "img/fireout.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*101),
+                            slot1: {
+                              context: "Take the car and escape",
+                              image: "img/humvee.jpg",
+                              textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                              imagePop:"img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Kill them all",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Run away",
+                              image: "img/running.gif",
+                              textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Pull out your gun and attack",
+                            image: "img/forestshoot.gif",
+                            textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                            imagePop: "img/forestshoot.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot3: {
+                          context: "Try to save the man",
+                          image: "img/bleeding.gif",
+                          textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                          imagePop: "img/planecrash.jpg",
+                          truth: true,
+                          health: false,
+                            slot1: {
+                              context: "Steal one of the military humvee's",
+                              image: "img/humvee.jpg",
+                              textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: true,
+                              health: Math.floor(Math.random()*201),
+                              slot1: {
+                                health: true,
+                                healthDMG: 100,
+                              },
+                              slo2: {},
+                              slot3: {}
+                            },
+                            slot2: {
+                              context: "Surprise attack their camp",
+                              image: "img/forestshoot.gif",
+                              textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                              imagePop: "img/gunfightdie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            },
+                            slot3: {
+                              context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                              image: "img/hidden.jpg",
+                              textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                              imagePop: "img/tie.gif",
+                              truth: true,
+                              health: false,
+                              slot1: {health: true, healthDMG: 100},
+                              slot2: {},
+                              slot3: {}
+                            }
+                        }
+                      },
+                      slot3: {
+                        context: "Start to climb down the plane",
+                        image: "img/climb.gif",
+                        textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                        image: "img/planecrash.jpg",
+                        health: false,
+                        truth: true,
+                        slot1: {
+                          context: "Wait until it gets dark for them to sleep",
+                          image: "img/stealth.jpg",
+                          textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                          imagePop: "img/night.gif",
+                          health: true,
+                          truth: true,
+                          healthDMG: Math.floor(Math.random()*21),
+                          slot1: {
+                            context: "Kill all the soldiers in their sleep",
+                            image: "img/stealthkill.gif",
+                            textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                            imagePop: "img/tie.gif",
+                            health: false,
+                            truth: true,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Steal their military humvee",
+                            image: "img/humvee.jpg",
+                            textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1:{health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Sneak off into the night",
+                            image: "img/sneaking.gif",
+                            textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Pull out your gun and attack",
+                          image: "img/sneaking.gif",
+                          textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Steal a military humvee and attack",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      }
+                    }
                   },
                   slot3: {
                     context: "Convince the man to take the charge while you run away.",
@@ -1298,12 +5684,323 @@ var currentPlayer
                   textPop: "You pull out your gun and start firing away. You were able to pick off most of them, but a few were able to grab their gun and fire back. Luckily the man charged them as well, but he got badly hurt. After we cleared the soldiers, we walked outside to realize that we were at an airport. I had to come up with a plan quick before others realized what had happened.",
                   imagePop: "img/airport.png",
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
                     healthDMG: Math.floor(Math.random()*41),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                      imagePop: "img/mine.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
                   slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
                   },
                   slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Pull out your gun and attack",
+                          image: "img/forestshoot.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "Try to save the man",
+                        image: "img/bleeding.gif",
+                        textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Pull out your gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    }
                   }
                 }
               },
@@ -1524,7 +6221,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {},
+                          slot1: {health: true, healthDMG: 100},
                           slot2: {},
                           slot3: {}
                         },
@@ -1620,11 +6317,42 @@ var currentPlayer
                         truth: true,
                         health: false,
                         slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
                           health: true,
-                          healthDMG:  Math.floor(Math.random()*201),
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
                         },
-                        slot2: {},
-                        slot3: {}
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
                       }
                     },
                     slot3: {
@@ -1667,7 +6395,7 @@ var currentPlayer
                         slot3: {
                           context: "Sneak off into the night",
                           image: "img/sneaking.gif",
-                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
                           imagePop: "img/tie.gif",
                           truth: true,
                           health: false,
@@ -1793,11 +6521,326 @@ var currentPlayer
                   truth: true,
                   health: false,
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
-                    healthDMG: Math.floor(Math.random()*51),
+                    healthDMG: Math.floor(Math.random()*41),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You kept running for awhile, but unfortuantely stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "You turn around and decide to fight them. With no weapon at hand you literally charged back at the sniper and got blown away like an idiot.",
+                      imagePop: "img/gunfightdie.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
-                  slot2: {},
-                  slot3: {}
+                  slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it may be your best bet",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane you floored it and took heavy fire from the soldiers in the airfield, but somehow were able to get it off the ground. After a short flight due to you having no idea how to fly a plane, you crashed into the surrounding forest and went unconscious. Shortly after you woke up badly hurt in the plane which got ledged on top of a tree after the crash. The plane is wobly, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Try to steal a gun and kill them while they are busy",
+                          image: "img/sneaking.gif",
+                          textPop: "You stole a gun, but they heard caught you in the act and killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()* -101),
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Grab a gun and kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You grabbed a gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Try to steal weapons and attack them with it",
+                          image: "img/sneaking.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "You noticed a locked box in the back of the plane",
+                        image: "img/lockedbox.jpg",
+                        textPop: "You crawl towards the back of the plane to take a closer look at the box. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*201),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Steal a gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+
+                    }
+                  }
                 },
                 slot2: {
                   context: "Have the man shoot them as you guys have the element of surprise",
@@ -1807,11 +6850,324 @@ var currentPlayer
                   truth: true,
                   health: false,
                   slot1: {
+                    context: "Try to run out of the airfield into the forest not to far by and make a run for it",
+                    image: 'img/forest.gif',
+                    textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
+                    imagePop: 'img/bloodhand.gif',
                     health: true,
                     healthDMG: Math.floor(Math.random()*41),
+                    truth: true,
+                    slot1: {
+                      context: "Continue to run",
+                      image: "img/running.gif",
+                      textPop: "You guys kept running for awhile, but unfortuantely you stepped onto a mine and blew up",
+                      image: "img/mine.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*121),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Hide in the forest till things blow over",
+                      image: "img/sneaking.gif",
+                      textPop: "You guys hid in the forest for a couple hours, but their dogs were able to find you and eat you alive",
+                      imagePop: "img/dog.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot3: {
+                      context: "Turn around and fight",
+                      image: "img/forestshoot.gif",
+                      textPop: "The both of you turn around and decide to fight them with the advantage of your terrain you held them off for a very long time until they got tired of sending men in and used artiliary to blow you guys up. You died ",
+                      imagePop: "img/mine.gif",
+                      truth: true,
+                      health: false,
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    }
                   },
-                  slot2: {},
-                  slot3: {}
+                  slot2: {
+                    context: "You see soldiers loading weapons into an armory, maybe try to sneak into it?",
+                    image: "img/sneaking.gif",
+                    textPop: "You attempted to sneak into the armory, but was spotted by soldiers and was blasted away. The man got away, but You died",
+                    imagePop: "img/blastedaway.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      health: true,
+                      healthDMG: 100,
+                    },
+                    slot2: {},
+                    slot3: {}
+                  },
+                  slot3: {
+                    context: "You see a plane not too far away, you have no idea how to drive one, but it turns out that the man is actually a pilot. Just your luck",
+                    image: "img/plane.jpg",
+                    textPop: "You attempted to sneak to the plane, but was spotted by the sniper tower. You took heavy sniper fire and are bleeding, but you were able to get to the plane. After getting to the plane the man floored it and the plane took heavy damage from the soldiers at the airfield, but somehow he was able to get it off the ground. Unfortuantely the men at the airfield shot a hole into the gas container, the plane was running out of gas quick. The man steered the plane to crash land into the forest the best he could, but it was a rough landing. The landing crashed you guys onto a large tree, knocking you unconscious, but unfortuantely for the man a branch had pierced his chest killing him. Shortly after you woke up badly hurt in the plane which is woblying on the tree, you need to think of something fast.",
+                    imagePop: "img/bleeding.gif",
+                    truth: true,
+                    health: false,
+                    slot1: {
+                      context: "Use the plane radio to radio out for help",
+                      image: "img/radio.gif",
+                      textPop: "You decided to use the radio to try to call out for help, you got in contact with a man who said he was from a local town that wasn't too far. Seeing you have no other choice you decided to give him your coords for him to come save you with other people. While you were waiting for them to arive a military humvee showed up to your location revealing that the man on the radio was not who he said he was. They began to shoot you in the plane killing you",
+                      imagePop: "img/forestshoot.gif",
+                      truth: true,
+                      health: true,
+                      healthDMG: Math.floor(Math.random()*201),
+                      slot1: {health: true, healthDMG: 100},
+                      slot2: {},
+                      slot3: {}
+                    },
+                    slot2: {
+                      context: "Search the plane for any supplies",
+                      image: "img/insideplane.jpg",
+                      textPop: "You search inside the plane hoping to score on some supplies.",
+                      imagePop: "img/insideplane.jpg",
+                      truth: true,
+                      health: false,
+                      slot1: {
+                        context: "Grab the medikit and apply it on yourself",
+                        image: "img/medikit.png",
+                        textPop: "You grabbed the medikit and started to bandage up some of your open wounds. After you bandaged your wounds you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Steal one of the military humvee's",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            health: true,
+                            healthDMG: 100,
+                          },
+                          slo2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Surprise attack their camp",
+                          image: "img/forestshoot.gif",
+                          textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                          image: "img/hidden.jpg",
+                          textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Grab the flare gun",
+                        image: "img/flare.jpg",
+                        textPop: "You grabbed the flare gun and you started to notice the plane wobbling you grabbed onto something and braced for impact as the plane fell. After a moment to catch your breath you head out and run into a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                        slot1: {
+                          context: "Shoot the flare gun to start a fire near the camp",
+                          image: "img/fire.gif",
+                          textPop: "You snuck to a safe distance and shot the flare into a bush near the camp that instantly got caught in flames. The paniced soldiers all ran towards it trying to put it out, giving you some time to act.",
+                          imagePop: "img/fireout.gif",
+                          truth: true,
+                          health: true,
+                          health: Math.floor(Math.random()*101),
+                          slot1: {
+                            context: "Take the car and escape",
+                            image: "img/humvee.jpg",
+                            textPop: "As they were busy putting out the fire you ran and stole their vehicle. When you turned the engine on and floored it, the soldiers heard the car turn on and started to take fire at you, but you were long gone. You win",
+                            imagePop:"img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Kill them all",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but you were soon greatly out numbered and died.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Run away",
+                            image: "img/running.gif",
+                            textPop: "As you were running away you ran into a patrol who was coming into the camp to help put out hte fire. They didn't recongize you and shot you on the spot.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You attempt to steal their humvee, but you were spotted. They shot you dead",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Pull out your gun and attack",
+                          image: "img/forestshoot.gif",
+                          textPop: "You stole a gun and started firing at the soldiers, but there was too many of them for you to fight against. You died",
+                          imagePop: "img/forestshoot.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot3: {
+                        context: "Try to save the man",
+                        image: "img/bleeding.gif",
+                        textPop: "You crawl towards the back of the plane where the man was knocked back to. As you moved towards the back the entire plane began to wobble and fell out of the tree. You were thrown across and got really badly hurt. After a short while you gained the strength to move on leaving the man behind. You walked awhile until you came across a military camp.",
+                        imagePop: "img/planecrash.jpg",
+                        truth: true,
+                        health: false,
+                          slot1: {
+                            context: "Steal one of the military humvee's",
+                            image: "img/humvee.jpg",
+                            textPop: "You attempt to steal one of the military humvee's from the camp, but are spotted and killed.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: true,
+                            health: Math.floor(Math.random()*201),
+                            slot1: {
+                              health: true,
+                              healthDMG: 100,
+                            },
+                            slo2: {},
+                            slot3: {}
+                          },
+                          slot2: {
+                            context: "Surprise attack their camp",
+                            image: "img/forestshoot.gif",
+                            textPop: "You pulled out your gun and started firing at the soldiers, but their was to many to hold back and they killed you.",
+                            imagePop: "img/gunfightdie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          },
+                          slot3: {
+                            context: "Avoid the camp and follow the path that is alongside the camp as quietly as possible.",
+                            image: "img/hidden.jpg",
+                            textPop: "You quietly followed the path until it took you to a busy street where you were able to find help. YOU WIN",
+                            imagePop: "img/tie.gif",
+                            truth: true,
+                            health: false,
+                            slot1: {health: true, healthDMG: 100},
+                            slot2: {},
+                            slot3: {}
+                          }
+                      }
+                    },
+                    slot3: {
+                      context: "Start to climb down the plane",
+                      image: "img/climb.gif",
+                      textPop: "You exit the plane onto the tree and slowly make your way down. Not too long later the plane falls off the tree and collapses bellow. You work your way down slowly and towards the bottom of the tree you slip. You only take some bruises from falling. You started to head out and after awhile of walking you ran into a military camp.",
+                      image: "img/planecrash.jpg",
+                      health: false,
+                      truth: true,
+                      slot1: {
+                        context: "Wait until it gets dark for them to sleep",
+                        image: "img/stealth.jpg",
+                        textPop: "You decide the best thing to do is to wait until it gets dark to make a move.",
+                        imagePop: "img/night.gif",
+                        health: true,
+                        truth: true,
+                        healthDMG: Math.floor(Math.random()*21),
+                        slot1: {
+                          context: "Kill all the soldiers in their sleep",
+                          image: "img/stealthkill.gif",
+                          textPop: "You found a pocket knife in the camp and silently took out all the guards and took out all the soldiers. You were lucky that most of the guards were knocked out, once they were all dead, you continued to their humvee and road off into the distance.You win ",
+                          imagePop: "img/tie.gif",
+                          health: false,
+                          truth: true,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot2: {
+                          context: "Steal their military humvee",
+                          image: "img/humvee.jpg",
+                          textPop: "You got into the vehicle, but as soon as you started the car, a couple of the lookout soldiers who stayed away spotted you and shot you dead.",
+                          imagePop: "img/gunfightdie.gif",
+                          truth: true,
+                          health: false,
+                          slot1:{health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        },
+                        slot3: {
+                          context: "Sneak off into the night",
+                          image: "img/sneaking.gif",
+                          textPop: "You decide to leave them alone and sneak off into the distance. You continued for quite awhile and only a couple times almost accidently ran into a lookout, after awhile you came upon a busy street and were able to escape. You Win",
+                          imagePop: "img/tie.gif",
+                          truth: true,
+                          health: false,
+                          slot1: {health: true, healthDMG: 100},
+                          slot2: {},
+                          slot3: {}
+                        }
+                      },
+                      slot2: {
+                        context: "Pull out your gun and attack",
+                        image: "img/sneaking.gif",
+                        textPop: "You were able to steal a gun from the camp, but were spotted. You put up a good fight but they outnumbered you. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      },
+                      slot3: {
+                        context: "Steal a military humvee and attack",
+                        image: "img/humvee.jpg",
+                        textPop: "You got into the vehicle of the car, and started the engine to escape. Unfortuantely the noise of the car alerted the soldiers who ended up shooting you in the car. You died.",
+                        imagePop: "img/gunfightdie.gif",
+                        truth: true,
+                        health: false,
+                        slot1: {health: true, healthDMG: 100},
+                        slot2: {},
+                        slot3: {}
+                      }
+                    }
+                  }
                 },
                 slot3: {
                   context: "Charge them as the man gave you cover fire",
@@ -1902,7 +7258,7 @@ var currentPlayer
         icepick: false,
         radio: false,
         rope: false,
-        chocolate: 2
+        chocolate: 1
       },
     }
   }
@@ -1970,6 +7326,7 @@ var currentPlayer
       currentPlayer = game.players.player2
       game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
       game.paths.slot2.truth = true
+      boxFix()
       console.log(currentPlayer)
     }
   }
@@ -2027,11 +7384,47 @@ var currentPlayer
       'opacity': "0.9",
     })
   }
+  function boxFix() {
+    game.slot2.on('click',function(){
+            box()
+            $('#myModal').modal()
+            game.nextPath2(game.paths.slot2)
+            $('.ptwo').text(game.paths.slot2.textPop)
+            $('.pone').html('<img src ="' + game.paths.slot2.imagePop + '">')
+            switchPlayer()
+            getWinner()
+          })
+  }
   function unbind() {
     console.log(game.slot2)
     game.slot2.unbind('click')
     game.slot3.unbind('click')
     game.slot1.unbind('click')
+  }
+  function dryfix(slot, number) {
+    if (slot.axe == true) {axeTrue()}
+    if (slot.icepick == true) {icepickTrue()}
+    if (slot.hammer == true) {hammerTrue()}
+    if (slot.restart == true) {
+      game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
+    }
+    if (slot.health == true) {
+    healthKill(slot)
+  console.log("im running")}
+    if (slot.truth == true) {
+      game["slot" + number].on('click', function(){
+        box()
+        $('#myModal').modal()
+        game["nextPath" + number](slot)
+        $('.ptwo').text(slot.textPop)
+        $('.pone').html('<img src ="' + slot.imagePop + '">')
+        switchPlayer()
+        getWinner()
+        console.log("first")
+        })
+    }
+    game["slot" + number].attr('src', slot.image)
+    game["context" + number].text(slot.context)
   }
 restartbutton.on('click', function(){window.location.reload()})
 
