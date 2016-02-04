@@ -1,4 +1,10 @@
 header {
+
+}
+body{
+  background-image: url('http://wallpaperlayer.com/img/2015/9/dark-background-images-5554-5814-hd-wallpapers.jpg')
+}
+.survive {
   text-align: center;
   margin: 0 auto;
   font-size: 50px;
@@ -6,10 +12,19 @@ header {
   border: 2px solid #1D5273;
   background: black;
   font-family: 'Candal', sans-serif;
-  border-radius: 25%
+  border-radius: 25%;
 }
-body{
-  background-image: url('http://wallpaperlayer.com/img/2015/9/dark-background-images-5554-5814-hd-wallpapers.jpg')
+.restartg{
+  position: absolute;
+  top: 20px;
+  right: 10px;
+  width: 100px;
+  height: 30px;
+  font-size: 10px;
+  text-align: center;
+  background: black;
+  color: #9E0707;
+  border: 2px solid #9E0707;
 }
 .container2 {
   max-width: 700px;
@@ -58,6 +73,7 @@ body{
   text-align: center;
 
 }
+
 .slot {
   width: 200px;
   height: 350px;
