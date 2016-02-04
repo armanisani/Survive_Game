@@ -12,6 +12,7 @@ How to Play
 * After picking a path an event will pop up explaining the consequences of your decision
 
 * When you are done reading an event click outside the box for an easy exit out of it
+
 Game Tips
 ---
 ----
@@ -22,6 +23,7 @@ Game Tips
 * Becareful when you run
 
 * This game is really really hard
+
 Future Implementations
 ---
 -----
