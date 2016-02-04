@@ -4,6 +4,10 @@ header {
 body{
   background-image: url('http://wallpaperlayer.com/img/2015/9/dark-background-images-5554-5814-hd-wallpapers.jpg')
 }
+p{
+  color: red;
+  text-align: center;
+}
 .survive {
   text-align: center;
   margin: 0 auto;
@@ -58,7 +62,9 @@ body{
   margin: 0 10px 0 10px;
   text-align: center;
 }
-
+li {
+  color: darkred;
+}
 .context3{
   font-family: 'Candal', sans-serif;
   width: 200px;

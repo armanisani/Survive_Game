@@ -74,6 +74,8 @@ var currentPlayer
                   textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                   imagePop: 'IMG/bloodhand.gif',
                   health: true,
+                  bonus: true,
+                  bonuspts: 20,
                   healthDMG: Math.floor(Math.random()*41),
                   truth: true,
                   slot1: {
@@ -84,7 +86,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     healthDMG: Math.floor(Math.random()*121),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -95,7 +97,7 @@ var currentPlayer
                     imagePop: "IMG/dog.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -106,7 +108,7 @@ var currentPlayer
                     imagePop: "IMG/mine.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -120,7 +122,7 @@ var currentPlayer
                   health: false,
                   slot1: {
                     health: true,
-                    healthDMG: 100,
+                    healthDMG: 200,
                   },
                   slot2: {},
                   slot3: {}
@@ -140,7 +142,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     healthDMG: Math.floor(Math.random()*201),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -168,7 +170,7 @@ var currentPlayer
                         health: Math.floor(Math.random()*101),
                         slot1: {
                           health: true,
-                          healthDMG: 100,
+                          healthDMG: 200,
                         },
                         slo2: {},
                         slot3: {}
@@ -180,7 +182,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -191,8 +193,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                     },
@@ -218,8 +220,8 @@ var currentPlayer
                           imagePop:"IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -229,7 +231,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -240,7 +242,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -252,7 +254,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -263,7 +265,7 @@ var currentPlayer
                         imagePop: "IMG/forestshoot.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -285,7 +287,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -297,7 +299,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -308,8 +310,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                     }
@@ -336,8 +338,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         health: false,
                         truth: true,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       },
                       slot2: {
@@ -347,7 +349,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1:{health: true, healthDMG: 100},
+                        slot1:{health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -358,8 +360,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                     },
@@ -370,7 +372,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -381,7 +383,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -395,7 +397,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -406,7 +408,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth:true,
                 health:false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -419,7 +421,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             },
@@ -437,6 +439,8 @@ var currentPlayer
                 textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                 imagePop: 'IMG/bloodhand.gif',
                 health: true,
+                bonus: true,
+                bonuspts: 20,
                 healthDMG: Math.floor(Math.random()*101),
                 truth: true,
                 slot1: {
@@ -447,7 +451,7 @@ var currentPlayer
                   truth: true,
                   health: true,
                   healthDMG: Math.floor(Math.random()*121),
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -458,7 +462,7 @@ var currentPlayer
                   imagePop: "IMG/dog.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -469,7 +473,7 @@ var currentPlayer
                   imagePop: "IMG/mine.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -483,7 +487,7 @@ var currentPlayer
                 health: false,
                 slot1: {
                   health: true,
-                  healthDMG: 100,
+                  healthDMG: 200,
                 },
                 slot2: {},
                 slot3: {}
@@ -503,7 +507,7 @@ var currentPlayer
                   truth: true,
                   health: true,
                   healthDMG: Math.floor(Math.random()*201),
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -531,7 +535,7 @@ var currentPlayer
                       health: Math.floor(Math.random()*101),
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slo2: {},
                       slot3: {}
@@ -543,7 +547,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -554,8 +558,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     }
                   },
@@ -581,8 +585,8 @@ var currentPlayer
                         imagePop:"IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       },
                       slot2: {
@@ -592,7 +596,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -603,7 +607,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -615,7 +619,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -626,7 +630,7 @@ var currentPlayer
                       imagePop: "IMG/forestshoot.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -648,7 +652,7 @@ var currentPlayer
                         health: Math.floor(Math.random()*201),
                         slot1: {
                           health: true,
-                          healthDMG: 100,
+                          healthDMG: 200,
                         },
                         slo2: {},
                         slot3: {}
@@ -660,7 +664,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -671,8 +675,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                   }
@@ -699,8 +703,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       health: false,
                       truth: true,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     },
                     slot2: {
@@ -710,7 +714,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1:{health: true, healthDMG: 100},
+                      slot1:{health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -721,8 +725,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     }
                   },
@@ -733,7 +737,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -744,7 +748,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -761,7 +765,7 @@ var currentPlayer
             image: 'IMG/door.gif',
             textPop: "You use the axe to break open the lock, but the guard hears your attempt to free the man and returns fire at you. You die",
             imagePop: "IMG/gunfightdie.gif",
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
           },
@@ -773,7 +777,7 @@ var currentPlayer
             imagePop: "IMG/gunfightdie.gif",
             truth: true,
             health: false,
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
           }
@@ -818,6 +822,8 @@ var currentPlayer
                   textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                   imagePop: 'IMG/bloodhand.gif',
                   health: true,
+                  bonus: true,
+                  bonuspts: 20,
                   healthDMG: Math.floor(Math.random()*101),
                   truth: true,
                   slot1: {
@@ -828,7 +834,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     healthDMG: Math.floor(Math.random()*121),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -839,7 +845,7 @@ var currentPlayer
                     imagePop: "IMG/dog.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -850,7 +856,7 @@ var currentPlayer
                     imagePop: "IMG/mine.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -864,7 +870,7 @@ var currentPlayer
                   health: false,
                   slot1: {
                     health: true,
-                    healthDMG: 100,
+                    healthDMG: 200,
                   },
                   slot2: {},
                   slot3: {}
@@ -884,7 +890,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     healthDMG: Math.floor(Math.random()*201),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -912,7 +918,7 @@ var currentPlayer
                         health: Math.floor(Math.random()*101),
                         slot1: {
                           health: true,
-                          healthDMG: 100,
+                          healthDMG: 200,
                         },
                         slo2: {},
                         slot3: {}
@@ -924,7 +930,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -935,8 +941,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                     },
@@ -962,8 +968,8 @@ var currentPlayer
                           imagePop:"IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -973,7 +979,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -984,7 +990,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -996,7 +1002,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1007,7 +1013,7 @@ var currentPlayer
                         imagePop: "IMG/forestshoot.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -1029,7 +1035,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -1041,7 +1047,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -1052,8 +1058,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                     }
@@ -1080,8 +1086,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         health: false,
                         truth: true,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       },
                       slot2: {
@@ -1091,7 +1097,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1:{health: true, healthDMG: 100},
+                        slot1:{health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1102,8 +1108,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                     },
@@ -1114,7 +1120,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -1125,7 +1131,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -1140,7 +1146,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -1151,7 +1157,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth:true,
                 health:false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -1164,7 +1170,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             },
@@ -1182,6 +1188,8 @@ var currentPlayer
                 textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                 imagePop: 'IMG/bloodhand.gif',
                 health: true,
+                bonus: true,
+                bonuspts: 20,
                 healthDMG: Math.floor(Math.random()*101),
                 truth: true,
                 slot1: {
@@ -1192,7 +1200,7 @@ var currentPlayer
                   truth: true,
                   health: true,
                   healthDMG: Math.floor(Math.random()*121),
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -1203,7 +1211,7 @@ var currentPlayer
                   imagePop: "IMG/dog.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -1214,7 +1222,7 @@ var currentPlayer
                   imagePop: "IMG/mine.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -1228,7 +1236,7 @@ var currentPlayer
                 health: false,
                 slot1: {
                   health: true,
-                  healthDMG: 100,
+                  healthDMG: 200,
                 },
                 slot2: {},
                 slot3: {}
@@ -1248,7 +1256,7 @@ var currentPlayer
                   truth: true,
                   health: true,
                   healthDMG: Math.floor(Math.random()*201),
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -1276,7 +1284,7 @@ var currentPlayer
                       health: Math.floor(Math.random()*101),
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slo2: {},
                       slot3: {}
@@ -1288,7 +1296,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -1299,8 +1307,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     }
                   },
@@ -1326,8 +1334,8 @@ var currentPlayer
                         imagePop:"IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       },
                       slot2: {
@@ -1337,7 +1345,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1348,7 +1356,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -1360,7 +1368,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -1371,7 +1379,7 @@ var currentPlayer
                       imagePop: "IMG/forestshoot.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -1393,7 +1401,7 @@ var currentPlayer
                         health: Math.floor(Math.random()*201),
                         slot1: {
                           health: true,
-                          healthDMG: 100,
+                          healthDMG: 200,
                         },
                         slo2: {},
                         slot3: {}
@@ -1405,7 +1413,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1416,8 +1424,8 @@ var currentPlayer
                         imagePop: "IMG/tie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
-                        slot2: {},
+                        slot1: {health: true, healthDMG: 200},
+                        slot2: {bonus: true, bonuspts: 100,},
                         slot3: {}
                       }
                   }
@@ -1444,8 +1452,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       health: false,
                       truth: true,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     },
                     slot2: {
@@ -1455,7 +1463,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1:{health: true, healthDMG: 100},
+                      slot1:{health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -1466,8 +1474,8 @@ var currentPlayer
                       imagePop: "IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     }
                   },
@@ -1478,7 +1486,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -1489,7 +1497,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -1506,7 +1514,7 @@ var currentPlayer
             image: 'IMG/door.gif',
             textPop: "That turned out to be a really bad idea since the icepick can't really be used to open locks so you tried to smash it open. Unfortuantely the guard heard the noise and killed you.",
             imagePop: "IMG/gunfightdie.gif",
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
           },
@@ -1517,7 +1525,7 @@ var currentPlayer
             imagePop: "IMG/gunfightdie.gif",
             truth: true,
             health: false,
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
           }
@@ -1540,7 +1548,7 @@ var currentPlayer
             health: false,
             slot1: {
               health: true,
-              healthDMG: 100,
+              healthDMG: 200,
             },
             slot2: {},
             slot3: {}
@@ -1594,6 +1602,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -1604,7 +1614,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1615,7 +1625,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1626,7 +1636,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -1640,7 +1650,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -1660,7 +1670,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1688,7 +1698,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -1701,7 +1711,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -1712,8 +1722,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -1739,8 +1749,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -1750,7 +1760,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -1761,7 +1771,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -1773,7 +1783,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -1784,7 +1794,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -1806,7 +1816,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -1818,7 +1828,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -1829,8 +1839,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -1857,8 +1867,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -1868,7 +1878,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -1879,8 +1889,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -1891,7 +1901,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -1902,7 +1912,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -1924,6 +1934,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*101),
                       truth: true,
                       slot1: {
@@ -1934,7 +1946,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1945,7 +1957,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -1956,7 +1968,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -1970,7 +1982,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -1990,7 +2002,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2018,7 +2030,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -2030,7 +2042,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2041,8 +2053,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -2068,8 +2080,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -2079,7 +2091,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -2090,7 +2102,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -2102,7 +2114,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2113,7 +2125,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -2135,7 +2147,7 @@ var currentPlayer
                               health: Math.floor(Math.random()*201),
                               slot1: {
                                 health: true,
-                                healthDMG: 100,
+                                healthDMG: 200,
                               },
                               slo2: {},
                               slot3: {}
@@ -2147,7 +2159,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -2158,8 +2170,8 @@ var currentPlayer
                               imagePop: "IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             }
                         }
@@ -2186,8 +2198,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -2197,7 +2209,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2208,8 +2220,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -2220,7 +2232,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -2231,7 +2243,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -2251,6 +2263,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -2261,7 +2275,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2272,7 +2286,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2283,7 +2297,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -2297,7 +2311,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -2317,7 +2331,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2345,7 +2359,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -2358,7 +2372,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2369,8 +2383,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -2396,8 +2410,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -2407,7 +2421,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -2418,7 +2432,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -2430,7 +2444,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2441,7 +2455,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -2463,7 +2477,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -2475,7 +2489,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2486,8 +2500,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -2514,8 +2528,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -2525,7 +2539,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2536,8 +2550,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -2548,7 +2562,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -2559,7 +2573,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -2576,7 +2590,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -2593,6 +2607,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -2603,7 +2619,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -2614,7 +2630,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -2625,7 +2641,7 @@ var currentPlayer
                       imagePop: "IMG/mine.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -2639,7 +2655,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -2659,7 +2675,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -2687,7 +2703,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -2699,7 +2715,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -2710,8 +2726,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -2737,8 +2753,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -2748,7 +2764,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2759,7 +2775,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -2771,7 +2787,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -2782,7 +2798,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -2804,7 +2820,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -2816,7 +2832,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -2827,8 +2843,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                       }
@@ -2855,8 +2871,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -2866,7 +2882,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -2877,8 +2893,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -2889,7 +2905,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2900,7 +2916,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -2929,7 +2945,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     health: false,
                     truth: true,
-                    slot1: {health: true,healthDMG: 100},
+                    slot1: {health: true,healthDMG: 200},
                     slot2: {},
                     slot3: {},
                   },
@@ -2946,6 +2962,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -2956,7 +2974,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2967,7 +2985,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -2978,7 +2996,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -2992,7 +3010,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -3012,7 +3030,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -3040,7 +3058,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -3053,7 +3071,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3064,8 +3082,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -3091,8 +3109,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -3102,7 +3120,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -3113,7 +3131,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -3125,7 +3143,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3136,7 +3154,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -3158,7 +3176,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -3170,7 +3188,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3181,8 +3199,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -3209,8 +3227,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -3220,7 +3238,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3231,8 +3249,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -3243,7 +3261,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3254,7 +3272,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -3269,7 +3287,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth:true,
                     health:false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -3292,7 +3310,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -3304,7 +3322,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -3337,6 +3355,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -3347,7 +3367,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3358,7 +3378,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3369,7 +3389,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -3383,7 +3403,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -3403,7 +3423,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3431,7 +3451,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -3444,7 +3464,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3455,8 +3475,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -3482,8 +3502,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -3493,7 +3513,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3504,7 +3524,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -3516,7 +3536,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3527,7 +3547,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -3549,7 +3569,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -3561,7 +3581,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3572,8 +3592,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       }
@@ -3600,8 +3620,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -3611,7 +3631,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3622,8 +3642,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -3634,7 +3654,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -3645,7 +3665,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -3661,7 +3681,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -3672,7 +3692,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth:true,
                   health:false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -3684,7 +3704,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -3707,7 +3727,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             }
@@ -3750,6 +3770,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*51),
                     truth: true,
                     slot1: {
@@ -3760,7 +3782,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3771,7 +3793,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3782,7 +3804,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -3796,7 +3818,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -3816,7 +3838,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -3844,7 +3866,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -3857,7 +3879,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3868,8 +3890,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -3895,8 +3917,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -3906,7 +3928,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -3917,7 +3939,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -3929,7 +3951,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3940,7 +3962,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -3962,7 +3984,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -3974,7 +3996,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -3985,8 +4007,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       }
@@ -4013,8 +4035,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -4024,7 +4046,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -4035,8 +4057,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -4047,7 +4069,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -4058,7 +4080,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -4079,6 +4101,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -4089,7 +4113,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -4100,7 +4124,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -4111,7 +4135,7 @@ var currentPlayer
                       imagePop: "IMG/mine.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -4125,7 +4149,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -4145,7 +4169,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -4173,7 +4197,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -4185,7 +4209,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -4196,8 +4220,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -4223,8 +4247,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -4234,7 +4258,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -4245,7 +4269,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -4257,7 +4281,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -4268,7 +4292,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -4290,7 +4314,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -4302,7 +4326,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -4313,8 +4337,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                       }
@@ -4341,8 +4365,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -4352,7 +4376,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -4363,8 +4387,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -4375,7 +4399,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -4386,7 +4410,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -4400,7 +4424,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -4428,7 +4452,7 @@ var currentPlayer
                 truth: true,
                 textPop: "You and the man decided to attack them before they had a chance to react. The man was able to pick off most of them, but unfortuantely you decided to charge them with your fists since you had no weapon and ended up getting shot to death.",
                 imagePop: "IMG/gunfightdie.gif",
-                slot1: {health: true, healthDMG: 100,},
+                slot1: {health: true, healthDMG: 200,},
                 slot2: {},
                 slot3: {}
               }
@@ -4442,7 +4466,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             },
@@ -4455,7 +4479,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             }
@@ -4544,7 +4568,7 @@ var currentPlayer
                 truth: true,
                 health: true,
                 healthDMG: Math.floor(Math.random()*121),
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4555,7 +4579,7 @@ var currentPlayer
                 imagePop: "IMG/dog.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4566,7 +4590,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -4580,7 +4604,7 @@ var currentPlayer
               health: false,
               slot1: {
                 health: true,
-                healthDMG: 100,
+                healthDMG: 200,
               },
               slot2: {},
               slot3: {}
@@ -4600,7 +4624,7 @@ var currentPlayer
                 truth: true,
                 health: true,
                 healthDMG: Math.floor(Math.random()*201),
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4628,7 +4652,7 @@ var currentPlayer
                     health: Math.floor(Math.random()*101),
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slo2: {},
                     slot3: {}
@@ -4641,7 +4665,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     health: Math.floor(Math.random()* -101),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -4652,8 +4676,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 },
@@ -4679,8 +4703,8 @@ var currentPlayer
                       imagePop:"IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     },
                     slot2: {
@@ -4690,7 +4714,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -4701,7 +4725,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -4713,7 +4737,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -4724,7 +4748,7 @@ var currentPlayer
                     imagePop: "IMG/forestshoot.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -4746,7 +4770,7 @@ var currentPlayer
                     health: Math.floor(Math.random()*201),
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slo2: {},
                     slot3: {}
@@ -4758,7 +4782,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -4769,8 +4793,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 }
@@ -4797,8 +4821,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     health: false,
                     truth: true,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   },
                   slot2: {
@@ -4808,7 +4832,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1:{health: true, healthDMG: 100},
+                    slot1:{health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -4819,8 +4843,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 },
@@ -4831,7 +4855,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -4842,7 +4866,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -4859,7 +4883,7 @@ var currentPlayer
             health: false,
             slot1: {
               health: true,
-              healthDMG: 100,
+              healthDMG: 200,
             },
             slot2: {},
             slot3: {}
@@ -4871,7 +4895,7 @@ var currentPlayer
             imagePop: "IMG/gunfightdie.gif",
             truth: true,
             health: false,
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
         },
@@ -4910,7 +4934,7 @@ var currentPlayer
                 truth: true,
                 health: true,
                 healthDMG: Math.floor(Math.random()*121),
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4921,7 +4945,7 @@ var currentPlayer
                 imagePop: "IMG/dog.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4932,7 +4956,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -4946,7 +4970,7 @@ var currentPlayer
               health: false,
               slot1: {
                 health: true,
-                healthDMG: 100,
+                healthDMG: 200,
               },
               slot2: {},
               slot3: {}
@@ -4966,7 +4990,7 @@ var currentPlayer
                 truth: true,
                 health: true,
                 healthDMG: Math.floor(Math.random()*201),
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -4994,7 +5018,7 @@ var currentPlayer
                     health: Math.floor(Math.random()*101),
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slo2: {},
                     slot3: {}
@@ -5007,7 +5031,7 @@ var currentPlayer
                     truth: true,
                     health: true,
                     health: Math.floor(Math.random()* -101),
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -5018,8 +5042,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 },
@@ -5045,8 +5069,8 @@ var currentPlayer
                       imagePop:"IMG/tie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
-                      slot2: {},
+                      slot1: {health: true, healthDMG: 200},
+                      slot2: {bonus: true, bonuspts: 100,},
                       slot3: {}
                     },
                     slot2: {
@@ -5056,7 +5080,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -5067,7 +5091,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -5079,7 +5103,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -5090,7 +5114,7 @@ var currentPlayer
                     imagePop: "IMG/forestshoot.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -5112,7 +5136,7 @@ var currentPlayer
                     health: Math.floor(Math.random()*201),
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slo2: {},
                     slot3: {}
@@ -5124,7 +5148,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -5135,8 +5159,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 }
@@ -5163,8 +5187,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     health: false,
                     truth: true,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   },
                   slot2: {
@@ -5174,7 +5198,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth: true,
                     health: false,
-                    slot1:{health: true, healthDMG: 100},
+                    slot1:{health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   },
@@ -5185,8 +5209,8 @@ var currentPlayer
                     imagePop: "IMG/tie.gif",
                     truth: true,
                     health: false,
-                    slot1: {health: true, healthDMG: 100},
-                    slot2: {},
+                    slot1: {health: true, healthDMG: 200},
+                    slot2: {bonus: true, bonuspts: 100,},
                     slot3: {}
                   }
                 },
@@ -5197,7 +5221,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -5208,7 +5232,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -5226,7 +5250,7 @@ var currentPlayer
             health: false,
             slot1: {
               health: true,
-              healthDMG: 100,
+              healthDMG: 200,
               restart: true,
             },
             slot2: {},
@@ -5240,7 +5264,7 @@ var currentPlayer
             imagePop: "IMG/gunfightdie.gif",
             truth: true,
             health: false,
-            slot1: {health: true, healthDMG: 100},
+            slot1: {health: true, healthDMG: 200},
             slot2: {},
             slot3: {}
         },
@@ -5263,7 +5287,7 @@ var currentPlayer
             health: false,
             slot1: {
               health: true,
-              healthDMG: 100,
+              healthDMG: 200,
             },
             slot2: {},
             slot3: {}
@@ -5316,6 +5340,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -5326,7 +5352,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5337,7 +5363,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5348,7 +5374,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -5362,7 +5388,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -5382,7 +5408,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5410,7 +5436,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -5422,7 +5448,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5433,8 +5459,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -5460,8 +5486,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -5471,7 +5497,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -5482,7 +5508,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -5494,7 +5520,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5505,7 +5531,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -5527,7 +5553,7 @@ var currentPlayer
                               health: Math.floor(Math.random()*201),
                               slot1: {
                                 health: true,
-                                healthDMG: 100,
+                                healthDMG: 200,
                               },
                               slo2: {},
                               slot3: {}
@@ -5539,7 +5565,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -5550,8 +5576,8 @@ var currentPlayer
                               imagePop: "IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             }
                         }
@@ -5578,8 +5604,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -5589,7 +5615,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5600,8 +5626,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -5612,7 +5638,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -5623,7 +5649,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -5643,6 +5669,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*31),
                       truth: true,
                       slot1: {
@@ -5653,7 +5681,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5664,7 +5692,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5675,7 +5703,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -5689,7 +5717,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -5709,7 +5737,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5737,7 +5765,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -5749,7 +5777,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5760,8 +5788,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -5787,8 +5815,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -5798,7 +5826,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -5809,7 +5837,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -5821,7 +5849,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5832,7 +5860,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -5854,7 +5882,7 @@ var currentPlayer
                               health: Math.floor(Math.random()*201),
                               slot1: {
                                 health: true,
-                                healthDMG: 100,
+                                healthDMG: 200,
                               },
                               slo2: {},
                               slot3: {}
@@ -5866,7 +5894,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -5877,8 +5905,8 @@ var currentPlayer
                               imagePop: "IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             }
                         }
@@ -5905,8 +5933,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -5916,7 +5944,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -5927,8 +5955,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -5939,7 +5967,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -5950,7 +5978,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -5970,6 +5998,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -5980,7 +6010,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -5991,7 +6021,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6002,7 +6032,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -6016,7 +6046,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -6036,7 +6066,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6064,7 +6094,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -6077,7 +6107,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6088,8 +6118,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6115,8 +6145,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -6126,7 +6156,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -6137,7 +6167,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -6149,7 +6179,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6160,7 +6190,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -6182,7 +6212,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -6194,7 +6224,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6205,8 +6235,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -6233,8 +6263,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -6244,7 +6274,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6255,8 +6285,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6267,7 +6297,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -6278,7 +6308,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -6300,6 +6330,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*101),
                       truth: true,
                       slot1: {
@@ -6310,7 +6342,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6321,7 +6353,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6332,7 +6364,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -6346,7 +6378,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -6366,7 +6398,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6394,7 +6426,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -6406,7 +6438,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6417,8 +6449,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6444,8 +6476,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -6455,7 +6487,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -6466,7 +6498,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -6478,7 +6510,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6489,7 +6521,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -6511,7 +6543,7 @@ var currentPlayer
                               health: Math.floor(Math.random()*201),
                               slot1: {
                                 health: true,
-                                healthDMG: 100,
+                                healthDMG: 200,
                               },
                               slo2: {},
                               slot3: {}
@@ -6523,7 +6555,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -6534,8 +6566,8 @@ var currentPlayer
                               imagePop: "IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             }
                         }
@@ -6562,8 +6594,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -6573,7 +6605,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6584,8 +6616,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6596,7 +6628,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -6607,7 +6639,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -6627,6 +6659,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -6637,7 +6671,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6648,7 +6682,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6659,7 +6693,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -6673,7 +6707,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -6693,7 +6727,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -6721,7 +6755,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -6734,7 +6768,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6745,8 +6779,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6772,8 +6806,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -6783,7 +6817,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -6794,7 +6828,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -6806,7 +6840,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6817,7 +6851,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -6839,7 +6873,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -6851,7 +6885,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6862,8 +6896,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -6890,8 +6924,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -6901,7 +6935,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -6912,8 +6946,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -6924,7 +6958,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -6935,7 +6969,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -6953,7 +6987,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -6970,6 +7004,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -6980,7 +7016,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -6991,7 +7027,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -7002,7 +7038,7 @@ var currentPlayer
                       imagePop: "IMG/mine.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -7016,7 +7052,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -7036,7 +7072,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -7064,7 +7100,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -7076,7 +7112,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -7087,8 +7123,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -7114,8 +7150,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -7125,7 +7161,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7136,7 +7172,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -7148,7 +7184,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -7159,7 +7195,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -7181,7 +7217,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -7193,7 +7229,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7204,8 +7240,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                       }
@@ -7232,8 +7268,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -7243,7 +7279,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -7254,8 +7290,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -7266,7 +7302,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7277,7 +7313,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -7306,7 +7342,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     health: false,
                     truth: true,
-                    slot1: {health: true,healthDMG: 100},
+                    slot1: {health: true,healthDMG: 200},
                     slot2: {},
                     slot3: {},
                   },
@@ -7323,6 +7359,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -7333,7 +7371,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7344,7 +7382,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7355,7 +7393,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -7369,7 +7407,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -7389,7 +7427,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7417,7 +7455,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -7430,7 +7468,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7441,8 +7479,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -7468,8 +7506,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -7479,7 +7517,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -7490,7 +7528,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -7502,7 +7540,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7513,7 +7551,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -7535,7 +7573,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -7547,7 +7585,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7558,8 +7596,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -7586,8 +7624,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -7597,7 +7635,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7608,8 +7646,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -7620,7 +7658,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -7631,7 +7669,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -7653,6 +7691,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*101),
                       truth: true,
                       slot1: {
@@ -7663,7 +7703,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7674,7 +7714,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7685,7 +7725,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -7699,7 +7739,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -7719,7 +7759,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -7747,7 +7787,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -7759,7 +7799,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7770,8 +7810,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -7797,8 +7837,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -7808,7 +7848,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -7819,7 +7859,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -7831,7 +7871,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7842,7 +7882,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -7864,7 +7904,7 @@ var currentPlayer
                               health: Math.floor(Math.random()*201),
                               slot1: {
                                 health: true,
-                                healthDMG: 100,
+                                healthDMG: 200,
                               },
                               slo2: {},
                               slot3: {}
@@ -7876,7 +7916,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -7887,8 +7927,8 @@ var currentPlayer
                               imagePop: "IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             }
                         }
@@ -7915,8 +7955,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -7926,7 +7966,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -7937,8 +7977,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -7949,7 +7989,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -7960,7 +8000,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -7980,6 +8020,8 @@ var currentPlayer
                       textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                       imagePop: 'IMG/bloodhand.gif',
                       health: true,
+                      bonus: true,
+                      bonuspts: 20,
                       healthDMG: Math.floor(Math.random()*41),
                       truth: true,
                       slot1: {
@@ -7990,7 +8032,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*121),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -8001,7 +8043,7 @@ var currentPlayer
                         imagePop: "IMG/dog.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -8012,7 +8054,7 @@ var currentPlayer
                         imagePop: "IMG/mine.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -8026,7 +8068,7 @@ var currentPlayer
                       health: false,
                       slot1: {
                         health: true,
-                        healthDMG: 100,
+                        healthDMG: 200,
                       },
                       slot2: {},
                       slot3: {}
@@ -8046,7 +8088,7 @@ var currentPlayer
                         truth: true,
                         health: true,
                         healthDMG: Math.floor(Math.random()*201),
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -8074,7 +8116,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*101),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -8087,7 +8129,7 @@ var currentPlayer
                             truth: true,
                             health: true,
                             health: Math.floor(Math.random()* -101),
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8098,8 +8140,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -8125,8 +8167,8 @@ var currentPlayer
                               imagePop:"IMG/tie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
-                              slot2: {},
+                              slot1: {health: true, healthDMG: 200},
+                              slot2: {bonus: true, bonuspts: 100,},
                               slot3: {}
                             },
                             slot2: {
@@ -8136,7 +8178,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             },
@@ -8147,7 +8189,7 @@ var currentPlayer
                               imagePop: "IMG/gunfightdie.gif",
                               truth: true,
                               health: false,
-                              slot1: {health: true, healthDMG: 100},
+                              slot1: {health: true, healthDMG: 200},
                               slot2: {},
                               slot3: {}
                             }
@@ -8159,7 +8201,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8170,7 +8212,7 @@ var currentPlayer
                             imagePop: "IMG/forestshoot.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -8192,7 +8234,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -8204,7 +8246,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8215,8 +8257,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         }
@@ -8243,8 +8285,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             health: false,
                             truth: true,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -8254,7 +8296,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1:{health: true, healthDMG: 100},
+                            slot1:{health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8265,8 +8307,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                         },
@@ -8277,7 +8319,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8288,7 +8330,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -8303,7 +8345,7 @@ var currentPlayer
                     imagePop: "IMG/gunfightdie.gif",
                     truth:true,
                     health:false,
-                    slot1: {health: true, healthDMG: 100},
+                    slot1: {health: true, healthDMG: 200},
                     slot2: {},
                     slot3: {}
                   }
@@ -8326,7 +8368,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -8338,7 +8380,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               }
@@ -8370,6 +8412,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -8380,7 +8424,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8391,7 +8435,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8402,7 +8446,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -8416,7 +8460,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -8436,7 +8480,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8464,7 +8508,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -8477,7 +8521,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8488,8 +8532,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -8515,8 +8559,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -8526,7 +8570,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8537,7 +8581,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -8549,7 +8593,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8560,7 +8604,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -8582,7 +8626,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -8594,7 +8638,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8605,8 +8649,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       }
@@ -8633,8 +8677,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -8644,7 +8688,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8655,8 +8699,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -8667,7 +8711,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -8678,7 +8722,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -8693,7 +8737,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 },
@@ -8704,7 +8748,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth:true,
                   health:false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -8716,7 +8760,7 @@ var currentPlayer
                 imagePop: "IMG/gunfightdie.gif",
                 truth: true,
                 health: false,
-                slot1: {health: true, healthDMG: 100},
+                slot1: {health: true, healthDMG: 200},
                 slot2: {},
                 slot3: {}
               },
@@ -8739,7 +8783,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             }
@@ -8782,6 +8826,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you were spotted and were under heavy sniper fire, and are bleeding, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -8792,7 +8838,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8803,7 +8849,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8814,7 +8860,7 @@ var currentPlayer
                       imagePop: "IMG/gunfightdie.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -8828,7 +8874,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -8848,7 +8894,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -8876,7 +8922,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -8889,7 +8935,7 @@ var currentPlayer
                           truth: true,
                           health: true,
                           health: Math.floor(Math.random()* -101),
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8900,8 +8946,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -8927,8 +8973,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -8938,7 +8984,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -8949,7 +8995,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -8961,7 +9007,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -8972,7 +9018,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -8994,7 +9040,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*201),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -9006,7 +9052,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -9017,8 +9063,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100},
                           slot3: {}
                         }
                       }
@@ -9045,8 +9091,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -9056,7 +9102,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -9067,8 +9113,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -9079,7 +9125,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -9090,7 +9136,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -9111,6 +9157,8 @@ var currentPlayer
                     textPop: "You decided to make a run for the forest. Unfortuantely you and the man were spotted and were under heavy sniper fire. Both of you are bleeding badly, but made it to the forest.",
                     imagePop: 'IMG/bloodhand.gif',
                     health: true,
+                    bonus: true,
+                    bonuspts: 20,
                     healthDMG: Math.floor(Math.random()*41),
                     truth: true,
                     slot1: {
@@ -9121,7 +9169,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*121),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -9132,7 +9180,7 @@ var currentPlayer
                       imagePop: "IMG/dog.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -9143,7 +9191,7 @@ var currentPlayer
                       imagePop: "IMG/mine.gif",
                       truth: true,
                       health: false,
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     }
@@ -9157,7 +9205,7 @@ var currentPlayer
                     health: false,
                     slot1: {
                       health: true,
-                      healthDMG: 100,
+                      healthDMG: 200,
                     },
                     slot2: {},
                     slot3: {}
@@ -9177,7 +9225,7 @@ var currentPlayer
                       truth: true,
                       health: true,
                       healthDMG: Math.floor(Math.random()*201),
-                      slot1: {health: true, healthDMG: 100},
+                      slot1: {health: true, healthDMG: 200},
                       slot2: {},
                       slot3: {}
                     },
@@ -9205,7 +9253,7 @@ var currentPlayer
                           health: Math.floor(Math.random()*101),
                           slot1: {
                             health: true,
-                            healthDMG: 100,
+                            healthDMG: 200,
                           },
                           slo2: {},
                           slot3: {}
@@ -9217,7 +9265,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -9228,8 +9276,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -9255,8 +9303,8 @@ var currentPlayer
                             imagePop:"IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           },
                           slot2: {
@@ -9266,7 +9314,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -9277,7 +9325,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           }
@@ -9289,7 +9337,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -9300,7 +9348,7 @@ var currentPlayer
                           imagePop: "IMG/forestshoot.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
+                          slot1: {health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         }
@@ -9322,7 +9370,7 @@ var currentPlayer
                             health: Math.floor(Math.random()*201),
                             slot1: {
                               health: true,
-                              healthDMG: 100,
+                              healthDMG: 200,
                             },
                             slo2: {},
                             slot3: {}
@@ -9334,7 +9382,7 @@ var currentPlayer
                             imagePop: "IMG/gunfightdie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
+                            slot1: {health: true, healthDMG: 200},
                             slot2: {},
                             slot3: {}
                           },
@@ -9345,8 +9393,8 @@ var currentPlayer
                             imagePop: "IMG/tie.gif",
                             truth: true,
                             health: false,
-                            slot1: {health: true, healthDMG: 100},
-                            slot2: {},
+                            slot1: {health: true, healthDMG: 200},
+                            slot2: {bonus: true, bonuspts: 100,},
                             slot3: {}
                           }
                       }
@@ -9373,8 +9421,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           health: false,
                           truth: true,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         },
                         slot2: {
@@ -9384,7 +9432,7 @@ var currentPlayer
                           imagePop: "IMG/gunfightdie.gif",
                           truth: true,
                           health: false,
-                          slot1:{health: true, healthDMG: 100},
+                          slot1:{health: true, healthDMG: 200},
                           slot2: {},
                           slot3: {}
                         },
@@ -9395,8 +9443,8 @@ var currentPlayer
                           imagePop: "IMG/tie.gif",
                           truth: true,
                           health: false,
-                          slot1: {health: true, healthDMG: 100},
-                          slot2: {},
+                          slot1: {health: true, healthDMG: 200},
+                          slot2: {bonus: true, bonuspts: 100,},
                           slot3: {}
                         }
                       },
@@ -9407,7 +9455,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       },
@@ -9418,7 +9466,7 @@ var currentPlayer
                         imagePop: "IMG/gunfightdie.gif",
                         truth: true,
                         health: false,
-                        slot1: {health: true, healthDMG: 100},
+                        slot1: {health: true, healthDMG: 200},
                         slot2: {},
                         slot3: {}
                       }
@@ -9432,7 +9480,7 @@ var currentPlayer
                   imagePop: "IMG/gunfightdie.gif",
                   truth: true,
                   health: false,
-                  slot1: {health: true, healthDMG: 100},
+                  slot1: {health: true, healthDMG: 200},
                   slot2: {},
                   slot3: {}
                 }
@@ -9460,7 +9508,7 @@ var currentPlayer
                 truth: true,
                 textPop: "You and the man decided to attack them before they had a chance to react. The man was able to pick off most of them, but unfortuantely you decided to charge them with your fists since you had no weapon and ended up getting shot to death.",
                 imagePop: "IMG/gunfightdie.gif",
-                slot1: {health: true, healthDMG: 100,},
+                slot1: {health: true, healthDMG: 200,},
                 slot2: {},
                 slot3: {}
               }
@@ -9474,7 +9522,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             },
@@ -9487,7 +9535,7 @@ var currentPlayer
               imagePop: "IMG/gunfightdie.gif",
               truth: true,
               health: false,
-              slot1: {health: true, healthDMG: 100},
+              slot1: {health: true, healthDMG: 200},
               slot2: {},
               slot3: {}
             }
@@ -9518,6 +9566,7 @@ var currentPlayer
       },
     }
   }
+  var soundplay = $('.pathopen')[0]
   var player2points = $('.rightPoints')
   var player1points = $('.leftPoints')
   var player2health = $('.rightHealth')
@@ -9658,6 +9707,7 @@ var currentPlayer
     game.slot1.unbind('click')
   }
   function dryfix(slot, number) {
+    soundplay.play()
     bonus(slot)
     if (slot.axe == true) {axeTrue()}
     if (slot.icepick == true) {icepickTrue()}
@@ -9688,9 +9738,11 @@ var currentPlayer
       currentPlayer.total += number.bonuspts
     }
   }
+  function startup() {
+    $('#myModal').modal()
+    $('.pone').html('<p>Welcome to the choose your own adventure Survival Game </p><br><p> Game Rules </p><br><ol type="1"><li>Pick a path by clicking the picture of the path you find best</li><li>After picking a path an event will pop up explaining the consequences of your decision</li><li>When you are done reading an event click outside the box for an easy exit out of it</li><li>The farther you get the more points you recieve</li><li>The winner with the most points wins</li><li> Then repeat these steps</li></ol><br><p>Game Tips</p><br><ol type="1"><li>Make sure to check the box first to get your tool that will help you get started</li><li>Dont trust the soldiers, they will hurt you</li><li>Becareful when you run</li><li> This game is really really hard</li></ol> ')
+  }
 restartbutton.on('click', function(){window.location.reload()})
-
 // make all the above into a function and change player inventory to functions instead of true and false after game is complete on another branch
-
-
+startup()
 game.pickPath(game.paths.slot1, game.paths.slot2, game.paths.slot3)
