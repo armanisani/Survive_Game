@@ -7,6 +7,9 @@ Each stage you continue onto will reward you with 5 points to your score, and if
 
 Play this game here:
 http://armanisani.github.io/Survive_Game/
+User Stories
+https://trello.com/b/v5tNGLoW/wdi-p1
+
 How to Play
 ---------------------------
 ---
@@ -50,3 +53,7 @@ Technologies/Frameworks
 * jQuery
 
 * Bootstrap
+
+<a href='http://postimg.org/image/w1uokc5g1/' target='_blank'><img src='http://s24.postimg.org/w1uokc5g1/Bai_Board_2016_02_15_16_39_49.jpg' border='0' alt="Bai Board 2016 02 15 16 39 49" /></a>
+
+<a href='http://postimg.org/image/ggcutmknn/' target='_blank'><img src='http://s21.postimg.org/ggcutmknn/Bai_Board_2016_02_15_16_40_59.jpg' border='0' alt="Bai Board 2016 02 15 16 40 59" /></a>
